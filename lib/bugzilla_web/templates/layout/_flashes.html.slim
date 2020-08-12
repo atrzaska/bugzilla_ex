@@ -1,0 +1,8 @@
+= if get_flash(@conn, :error) do
+  .alert.alert-error
+    button.close data-dismiss='alert' type='button'  &times;
+    = get_flash(@conn, :error)
+= if get_flash(@conn, :info) do
+  .alert
+    button.close data-dismiss='alert' type='button'  &times;
+    = get_flash(@conn, :info)
