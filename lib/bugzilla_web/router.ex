@@ -19,7 +19,7 @@ defmodule BugzillaWeb.Router do
   scope "/", BugzillaWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", ProductController, :index
   end
 
   # Other scopes may use custom stacks.
@@ -39,7 +39,7 @@ defmodule BugzillaWeb.Router do
 
     scope "/" do
       pipe_through :browser
-      live_dashboard "/dashboard", metrics: BugzillaWeb.Telemetry
+      live_dashboard "/admin/dashboard", metrics: BugzillaWeb.Telemetry
     end
   end
 
@@ -61,6 +61,7 @@ defmodule BugzillaWeb.Router do
   scope "/", BugzillaWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    get "/dashboard", DashboardController, :index
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings/update_password", UserSettingsController, :update_password
     put "/users/settings/update_email", UserSettingsController, :update_email
@@ -70,6 +71,8 @@ defmodule BugzillaWeb.Router do
   scope "/", BugzillaWeb do
     pipe_through [:browser]
 
+    get "/privacy", PrivacyController, :index
+    get "/terms", TermsController, :index
     delete "/users/log_out", UserSessionController, :delete
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create

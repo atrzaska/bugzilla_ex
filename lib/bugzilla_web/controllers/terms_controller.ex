@@ -1,4 +1,4 @@
-defmodule BugzillaWeb.PageController do
+defmodule BugzillaWeb.TermsController do
   use BugzillaWeb, :controller
 
   def index(conn, _params) do

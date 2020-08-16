@@ -1,0 +1,34 @@
+= form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: 'form-signin'], fn f ->
+  h2.mb2 Sign in
+  = if @error_message do
+    .alert.alert-danger
+      p = @error_message
+
+  .control-group
+    = email_input f, :email, required: true, class: "input-block-level", placeholder: "Email address"
+  .control-group
+    = password_input f, :password, required: true, class: "input-block-level", placeholder: "Password"
+  .control-group
+    label.checkbox.mb2
+      = checkbox f, :remember_me
+      | Remember me
+
+  = submit "Sign in", class: "btn btn-large btn-primary col-12"
+
+  p.h4.center.my3 Or sign in with:
+
+  .col-12.flex.items-center.justify-center
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/google.svg") title="Google" alt="Google"
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/facebook.svg") title="Facebook" alt="Facebook"
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/slack.svg") title="Slack" alt="Slack"
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/office.svg") title="Office 365" alt="Office 365"
+
+
+  hr
+  = link "Sign up", to: Routes.user_registration_path(@conn, :new)
+  | &nbsp;|&nbsp;
+  = link "Forgot password?", to: Routes.user_reset_password_path(@conn, :new)

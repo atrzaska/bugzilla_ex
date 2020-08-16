@@ -1,0 +1,42 @@
+= form_for @changeset, Routes.user_registration_path(@conn, :create), [class: "form-signin"], fn f ->
+  h2 Get started free today
+  p.mb2 No credit card required
+
+  = if @changeset.action do
+    .alert.alert-danger
+      p Oops, something went wrong! Please check the errors below.
+
+  .control-group
+    = email_input f, :email, required: true, class: "input-block-level", placeholder: "Email address"
+    = error_tag f, :email, class: 'text-error'
+  .control-group
+    = password_input f, :password, required: true, class: "input-block-level", placeholder: "Password"
+    = error_tag f, :password
+  .control-group
+    label.checkbox
+      = checkbox f, :terms, required: true
+      | I agree to Bugzilla&nbsp;
+      a href="/terms" target="blank" Terms
+      | &nbsp;and&nbsp;
+      a href="/privacy" target="blank" Privacy Policy
+  .control-group
+    label.checkbox.mb2
+      = checkbox f, :news
+      | I agree to receive Bugzilla news and updates.
+
+  = submit "Get started now", class: "btn btn-large btn-primary col-12"
+
+  p.h4.center.my3 Or sign up with:
+
+  .col-12.flex.items-center.justify-center
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/google.svg") title="Google" alt="Google"
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/facebook.svg") title="Facebook" alt="Facebook"
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/slack.svg") title="Slack" alt="Slack"
+    a href="/"
+      img.mx1 src=Routes.static_path(@conn, "/images/office.svg") title="Office 365" alt="Office 365"
+
+  hr
+  = link "Sign in", to: Routes.user_session_path(@conn, :new)
