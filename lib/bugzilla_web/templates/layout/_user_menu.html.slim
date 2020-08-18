@@ -1,9 +1,11 @@
-.nav-collapse
-  ul.nav.pull-right
-    = if @current_user do
-      li = link "Settings", to: Routes.user_settings_path(@conn, :edit)
-      li = link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete
-    - else
-      li = link "Sign up", to: Routes.user_registration_path(@conn, :new)
-      li = link "Log in", to: Routes.user_session_path(@conn, :new)
-
+nav.my-2.my-md-0.mr-md-3
+  a.p-2.text-dark href="#"  Features
+  a.p-2.text-dark href="#"  Enterprise
+  a.p-2.text-dark href="#"  Support
+  a.p-2.text-dark href="#"  Pricing
+= if @current_user do
+  = link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "btn btn-outline-primary mr-3"
+  = link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary"
+- else
+  = link "Sign up", to: Routes.user_registration_path(@conn, :new), class: "btn btn-outline-primary mr-3"
+  = link "Log in", to: Routes.user_session_path(@conn, :new), class: "btn btn-outline-primary"
