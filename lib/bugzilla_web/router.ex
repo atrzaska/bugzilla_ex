@@ -16,6 +16,10 @@ defmodule BugzillaWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :empty_layout do
+    plug :put_layout, {BugzillaWeb.LayoutView, :empty}
+  end
+
   scope "/", BugzillaWeb do
     pipe_through :browser
 
@@ -46,16 +50,16 @@ defmodule BugzillaWeb.Router do
   ## Authentication routes
 
   scope "/", BugzillaWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through [:browser, :redirect_if_user_is_authenticated, :empty_layout]
 
-    get "/users/register", UserRegistrationController, :new
-    post "/users/register", UserRegistrationController, :create
-    get "/users/log_in", UserSessionController, :new
-    post "/users/log_in", UserSessionController, :create
-    get "/users/reset_password", UserResetPasswordController, :new
-    post "/users/reset_password", UserResetPasswordController, :create
-    get "/users/reset_password/:token", UserResetPasswordController, :edit
-    put "/users/reset_password/:token", UserResetPasswordController, :update
+    get "/signup", UserRegistrationController, :new
+    post "/signup", UserRegistrationController, :create
+    get "/login", UserSessionController, :new
+    post "/login", UserSessionController, :create
+    get "/reset_password", UserResetPasswordController, :new
+    post "/reset_password", UserResetPasswordController, :create
+    get "/reset_password/:token", UserResetPasswordController, :edit
+    put "/reset_password/:token", UserResetPasswordController, :update
   end
 
   scope "/", BugzillaWeb do
