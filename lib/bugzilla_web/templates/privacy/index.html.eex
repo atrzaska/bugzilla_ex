@@ -1,4 +1,4 @@
-<h1 class="center pb3">Legal Information</h1>
+<h1 class="text-center pb-3">Legal Information</h1>
 
 <p>
   Publication date: January 1, 2020
@@ -692,8 +692,7 @@
   United States<br>
   Email: <a href="mailto:privacy@miro.com">privacy@miro.com</a>
 </p>
-</div>
 
-<div class="text-center mt3">
-<a href="/contact/sales/?lead_source=Legal" class="btn btn-primary btn-large">Contact sales</a>
+<div class="text-center my-4">
+  <a href="/contact/sales/?lead_source=Legal" class="btn btn-primary btn-lg">Contact sales</a>
 </div>

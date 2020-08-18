@@ -3,7 +3,7 @@
 
   = email_input f, :email, required: true, class: "form-control mb-4", placeholder: "Email address"
 
-  = submit "Resend confirmation instructions", class: "btn btn-large btn-primary"
+  = submit "Resend confirmation instructions", class: "btn btn-lg btn-primary btn-block mb-4"
 
   hr
   = link "Sign in", to: Routes.user_session_path(@conn, :new)
