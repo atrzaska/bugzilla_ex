@@ -54,10 +54,11 @@ defmodule BugzillaWeb.Router do
 
     get "/signup", UserRegistrationController, :new
     post "/signup", UserRegistrationController, :create
-    get "/login", UserSessionController, :new
-    post "/login", UserSessionController, :create
-    get "/reset_password", UserResetPasswordController, :new
-    post "/reset_password", UserResetPasswordController, :create
+    get "/signin", UserSessionController, :new
+    post "/signin", UserSessionController, :create
+    get "/recover", UserResetPasswordController, :new
+    post "/recover", UserResetPasswordController, :create
+    get "/recover/success", UserResetPasswordSuccessController, :index
     get "/reset_password/:token", UserResetPasswordController, :edit
     put "/reset_password/:token", UserResetPasswordController, :update
   end

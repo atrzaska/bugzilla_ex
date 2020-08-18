@@ -17,13 +17,7 @@ defmodule BugzillaWeb.UserResetPasswordController do
       )
     end
 
-    # Regardless of the outcome, show an impartial success/error message.
-    conn
-    |> put_flash(
-      :info,
-      "If your e-mail is in our system, you will receive instructions to reset your password shortly."
-    )
-    |> redirect(to: "/")
+    conn |> redirect(to: "/recover/success")
   end
 
   def edit(conn, _params) do

@@ -1,8 +1,7 @@
 = form_for :user, Routes.user_confirmation_path(@conn, :create), [class: "form-signin"], fn f ->
-  h2.mb2 Resend confirmation instructions
+  h2.mb-4 Resend confirmation instructions
 
-  .control-group
-    = email_input f, :email, required: true, class: "input-block-level", placeholder: "Email address"
+  = email_input f, :email, required: true, class: "form-control mb-4", placeholder: "Email address"
 
   = submit "Resend confirmation instructions", class: "btn btn-large btn-primary"
 

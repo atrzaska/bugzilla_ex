@@ -8,4 +8,4 @@ nav.my-2.my-md-0.mr-md-3
   = link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary"
 - else
   = link "Sign up", to: Routes.user_registration_path(@conn, :new), class: "btn btn-outline-primary mr-3"
-  = link "Log in", to: Routes.user_session_path(@conn, :new), class: "btn btn-outline-primary"
+  = link "Sign in", to: Routes.user_session_path(@conn, :new), class: "btn btn-outline-primary"

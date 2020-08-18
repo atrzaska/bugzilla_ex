@@ -1,11 +1,10 @@
-= form_for :user, Routes.user_reset_password_path(@conn, :create), [class: "form-signin"], fn f ->
-  h2 Password Recovery
-  p.mb2 Enter the email you're using for your account.
+= form_for :user, Routes.user_reset_password_path(@conn, :create), [class: "form-signin bg-white p-4"], fn f ->
+  h1.h3.mb-3.font-weight-normal Password Recovery
+  p.mb-4 Enter the email you're using for your account.
 
-  .control-group
-    = email_input f, :email, required: true, class: "input-block-level", placeholder: "Email address"
+  = email_input f, :email, required: true, class: "form-control mb-3", placeholder: "Email address"
 
-  = submit "Continue", class: "btn btn-large btn-primary col-12"
+  = submit "Continue", class: "btn btn-lg btn-primary btn-block mb-4"
 
   hr
   = link "Back to Sign in", to: Routes.user_session_path(@conn, :new)

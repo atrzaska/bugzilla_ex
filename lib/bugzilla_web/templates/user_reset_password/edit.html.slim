@@ -1,19 +1,17 @@
-= form_for @conn, Routes.user_reset_password_path(@conn, :update, @token), [class: "form-signin"], fn f ->
-  h2 Password Recovery
-  p.mb2 Enter your new password.
+= form_for @conn, Routes.user_reset_password_path(@conn, :update, @token), [class: "form-signin bg-white p-4"], fn f ->
+  h1.h3.mb-3.font-weight-normal Password Recovery
+  p.mb-4 Enter your new password.
 
   = if @changeset.action do
     .alert.alert-danger
       p Oops, something went wrong! Please check the errors below.
 
-  .control-group
-    = password_input f, :password, required: true, class: "input-block-level", placeholder: "Password"
-    = error_tag f, :password
-  .control-group
-    = password_input f, :password_confirmation, required: true, class: "input-block-level", placeholder: "Password"
-    = error_tag f, :password_confirmation
+  = password_input f, :password, required: true, class: "form-control", placeholder: "Password"
+  = error_tag f, :password
+  = password_input f, :password_confirmation, required: true, class: "form-control", placeholder: "Password"
+  = error_tag f, :password_confirmation
 
-  = submit "Reset password", class: "btn btn-large btn-primary col-12"
+  = submit "Reset password", class: "btn btn-lg btn-primary btn-block mb-4"
 
   hr
   = link "Sign in", to: Routes.user_session_path(@conn, :new)
