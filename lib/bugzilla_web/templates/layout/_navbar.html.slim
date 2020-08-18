@@ -1,10 +1,3 @@
-.navbar.navbar-fixed-top.navbar-inverse
-  .navbar-inner
-    .container
-      a.btn.btn-navbar data-target=".nav-collapse" data-toggle="collapse"
-        span.icon-bar
-        span.icon-bar
-        span.icon-bar
-      a.brand href="/" Bugzilla
-
-      = render "_user_menu.html", assigns
+.d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-white.border-bottom.shadow-sm
+  h5.my-0.mr-md-auto.font-weight-normal Bugzilla
+  = render "_user_menu.html", assigns
