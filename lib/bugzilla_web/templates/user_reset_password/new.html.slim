@@ -1,5 +1,5 @@
 = form_for :user, Routes.user_reset_password_path(@conn, :create), [class: "form-signin bg-white p-4"], fn f ->
-  h1.h3.mb-3.font-weight-normal Password Recovery
+  h1.h3.mb-3.font-weight-normal Password recovery
   p.mb-4 Enter the email you're using for your account.
 
   = email_input f, :email, required: true, class: "form-control mb-3", placeholder: "Email address"

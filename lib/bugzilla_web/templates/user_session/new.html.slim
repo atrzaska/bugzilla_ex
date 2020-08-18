@@ -2,7 +2,7 @@
   h1.h3.mb-3.font-weight-normal Sign in
   = if @error_message do
     .alert.alert-danger
-      p = @error_message
+      p.mb-0 = @error_message
 
   = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
   = password_input f, :password, required: true, class: "form-control", placeholder: "Password"

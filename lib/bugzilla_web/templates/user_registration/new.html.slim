@@ -4,7 +4,7 @@
 
   = if @changeset.action do
     .alert.alert-danger
-      p Oops, something went wrong! Please check the errors below.
+      p.mb-0 Oops, something went wrong! Please check the errors below.
 
   = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
   = error_tag f, :email, class: 'text-error'
