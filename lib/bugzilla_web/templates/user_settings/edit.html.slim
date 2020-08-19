@@ -1,0 +1,52 @@
+h1.text-center Settings
+h3.mb-4 Change e-mail
+
+= form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f ->
+  = if @email_changeset.action do
+    .alert.alert-danger
+      p.mb-0 Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :email, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = email_input f, :email, required: true, class: "form-control #{ invalid_field_class(f, :email) }", placeholder: "Email"
+      = error_tag f, :email
+
+  .form-group.row
+    = label f, :current_password, for: "current_password_for_email", class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email", class: "form-control #{ invalid_field_class(f, :current_password) }", placeholder: "Current password"
+      = error_tag f, :current_password
+
+  .form-group.row
+    .col-sm-10
+      = submit "Change e-mail", class: "btn btn-primary"
+
+h3.my-4 Change password
+
+= form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f ->
+  = if @password_changeset.action do
+    .alert.alert-danger
+      p.mb-0 Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :current_password, for: "current_password_for_password", class: "col-sm-2 col-form-label"
+      .col-sm-10
+        = password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password", class: "form-control #{ invalid_field_class(f, :current_password) }", placeholder: "Current password"
+        = error_tag f, :current_password
+
+  .form-group.row
+    = label f, :password, "New password", class: "col-sm-2 col-form-label"
+      .col-sm-10
+        = password_input f, :password, required: true, class: "form-control #{ invalid_field_class(f, :password) }", placeholder: "New password"
+        = error_tag f, :password
+
+  .form-group.row
+    = label f, :password_confirmation, "Confirm password", class: "col-sm-2 col-form-label"
+      .col-sm-10
+        = password_input f, :password_confirmation, required: true, class: "form-control #{ invalid_field_class(f, :password_confirmation) }", placeholder: "Confirm new password"
+        = error_tag f, :password_confirmation
+
+  .form-group.row
+    .col-sm-10
+      = submit "Change password", class: "btn btn-primary"

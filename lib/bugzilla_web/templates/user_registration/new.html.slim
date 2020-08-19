@@ -1,28 +1,31 @@
 = form_for @changeset, Routes.user_registration_path(@conn, :create), [class: "form-signin bg-white p-4"], fn f ->
   h1.h3.mb-3.font-weight-normal Get started free today
-  p.mb-4 No credit card required
+  p.mb-4.text-secondary No credit card required
 
   = if @changeset.action do
     .alert.alert-danger
       p.mb-0 Oops, something went wrong! Please check the errors below.
 
-  = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
-  = error_tag f, :email, class: 'text-error'
-  = password_input f, :password, required: true, class: "form-control", placeholder: "Password"
-  = error_tag f, :password
-  label.d-block.font-weight-normal
-    = checkbox f, :terms, required: true
-    | &nbsp;I agree to Bugzilla&nbsp;
-    a href="/terms" target="blank" Terms
-    | &nbsp;and&nbsp;
-    a href="/privacy" target="blank" Privacy Policy
-  label.d-block.font-weight-normal.mb-4
-    = checkbox f, :news
-    | &nbsp;I agree to receive Bugzilla news and updates.
+  .form-group
+    = email_input f, :email, required: true, class: "form-control #{ invalid_field_class(f, :email) }", placeholder: "Email address"
+    = error_tag f, :email
+    = password_input f, :password, required: true, class: "form-control #{ invalid_field_class(f, :password) }", placeholder: "Password"
+    = error_tag f, :password
+  .form-group
+    label.d-block.font-weight-normal.text-secondary
+      = checkbox f, :terms, required: true
+      | &nbsp;I agree to Bugzilla&nbsp;
+      a href="/terms" target="blank" Terms
+      | &nbsp;and&nbsp;
+      a href="/privacy" target="blank" Privacy Policy
+  .form-group
+    label.d-block.font-weight-normal.text-secondary
+      = checkbox f, :news
+      | &nbsp;I agree to receive Bugzilla news and updates.
+  .form-group
+    = submit "Get started now", class: "btn btn-lg btn-primary btn-block"
 
-  = submit "Get started now", class: "btn btn-lg btn-primary btn-block mb-4"
-
-  p.h4.text-center.mb-4 Or sign up with:
+  p.text-center.text-secondary.mb-4 Or sign up with:
 
   .d-flex.align-items-center.justify-content-center.mb-4
     a href="/"

@@ -1,9 +1,9 @@
 = unless is_nil(get_flash(@conn, :info)) do
-  .toast style=("position: absolute; top: 40px; right: 40px;") data-delay="8000"
+  .toast style=("position: absolute; top: 60px; right: 40px;") data-delay="8000"
     .toast-body.alert-success.p-3
       = get_flash(@conn, :info)
 
 = unless is_nil(get_flash(@conn, :error)) do
-  .toast style=("position: absolute; top: 40px; right: 40px;") data-delay="8000"
+  .toast style=("position: absolute; top: 60px; right: 40px;") data-delay="8000"
     .toast-body.alert-error.p-3
-      = get_flash(@conn, :info)
+      = get_flash(@conn, :error)

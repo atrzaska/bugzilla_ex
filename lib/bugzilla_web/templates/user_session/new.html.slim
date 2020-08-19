@@ -6,13 +6,13 @@
 
   = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
   = password_input f, :password, required: true, class: "form-control", placeholder: "Password"
-  label.d-block.font-weight-normal.mb-4
+  label.d-block.font-weight-normal.mb-4.text-secondary
     = checkbox f, :remember_me
     | &nbsp;Remember me
 
   = submit "Sign in", class: "btn btn-lg btn-primary btn-block mb-4"
 
-  p.h4.text-center.mb-4 Or sign in with:
+  p.text-center.text-secondary.mb-4 Or sign in with:
 
   .d-flex.align-items-center.justify-content-center.mb-4
     a href="/"
