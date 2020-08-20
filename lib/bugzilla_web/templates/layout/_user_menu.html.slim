@@ -1,8 +1,0 @@
-nav.my-2.my-md-0.mr-md-3
-  = if @current_user do
-    = link "Settings", to: Routes.user_settings_path(@conn, :edit), class: "p-2 text-dark"
-= if @current_user do
-  = link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary"
-- else
-  = link "Log in", to: Routes.user_session_path(@conn, :new), class: "mr-3"
-  = link "Sign up free →", to: Routes.user_registration_path(@conn, :new), class: "btn btn-primary"
