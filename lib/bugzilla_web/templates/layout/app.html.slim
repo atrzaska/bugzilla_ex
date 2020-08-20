@@ -6,13 +6,16 @@ html lang="en"
     link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"
     link href=Routes.static_path(@conn, "/css/app.css") rel="stylesheet"
     title Bugzilla
+    css:
+      body { background-color: #e5e5e5; }
   body
     = render "_flashes.html", assigns
     = render "_app_header.html", assigns
     .container
       .row
         .col-12
-          = @inner_content
+          .card
+            = @inner_content
     script src="https://code.jquery.com/jquery-3.5.1.min.js"
     script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
     script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
