@@ -1,0 +1,9 @@
+.d-flex.align-items-center.px-4.py-3.mb-1.border-bottom.shadow-sm
+  a.mr-auto.text-decoration-none.text-reset href="/"
+    h5.my-0.font-weight-normal Bugzilla
+  = if @current_user do
+    a.mr-3.p-2.text-dark href=Routes.user_settings_path(@conn, :edit) Settings
+    = link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary"
+  - else
+    a.mr-3.p-2 href=Routes.user_session_path(@conn, :new) Log in
+    a.btn.btn-primary href=Routes.user_registration_path(@conn, :new) Sign up free →
