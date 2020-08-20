@@ -113,4 +113,8 @@ defmodule Bugzilla.Accounts.User do
       add_error(changeset, :current_password, "is not valid")
     end
   end
+
+  def confirmed?(user) do
+    user |> Map.get(:confirmed_at) != nil
+  end
 end
