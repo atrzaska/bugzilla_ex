@@ -1,30 +1,24 @@
 = form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: 'form-signin bg-white p-4'], fn f ->
-  h1.h3.mb-3.font-weight-normal Sign in
+  h3.mb-3.font-weight-normal Sign in
   = if @error_message do
     .alert.alert-danger
       p.mb-0 = @error_message
 
-  = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
-  = password_input f, :password, required: true, class: "form-control", placeholder: "Password"
-  label.d-block.font-weight-normal.mb-4.text-secondary
-    = checkbox f, :remember_me
-    | &nbsp;Remember me
+  .form-group
+    = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
+    = password_input f, :password, required: true, class: "form-control", placeholder: "Password"
 
-  = submit "Sign in", class: "btn btn-lg btn-primary btn-block mb-4"
+  .form-group
+    label.d-block.font-weight-normal.mb-4.text-secondary
+      = checkbox f, :remember_me
+      | &nbsp;Remember me
 
-  p.text-center.text-secondary.mb-4 Or sign in with:
-
-  .d-flex.align-items-center.justify-content-center.mb-4
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/google.svg") title="Google" alt="Google"
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/facebook.svg") title="Facebook" alt="Facebook"
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/slack.svg") title="Slack" alt="Slack"
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/office.svg") title="Office 365" alt="Office 365"
+  .form-group
+    = submit "Sign in", class: "btn btn-lg btn-primary btn-block"
 
   hr
-  = link "Sign up", to: Routes.user_registration_path(@conn, :new)
+  = link "Sign up", to: Routes.user_registration_path(@conn, :new), class: "text-secondary text-decoration-none"
   | &nbsp;|&nbsp;
-  = link "Forgot password?", to: Routes.user_reset_password_path(@conn, :new)
+  = link "Forgot password?", to: Routes.user_reset_password_path(@conn, :new), class: "text-secondary text-decoration-none"
+  | &nbsp;|&nbsp;
+  = link "Didn't get confirmation email?", to: Routes.user_confirmation_path(@conn, :new), class: "text-secondary text-decoration-none"
