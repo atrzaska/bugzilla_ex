@@ -1,1 +1,10 @@
-h1 Product page!
+= render_shared "_product_header.html", assigns
+
+.jumbotron.bg-white.text-center.mx-auto.product-header
+  h1.display-4.pb-4 Bugzilla, simple and effective project management for your team
+  p.lead.pb-5.text-secondary Collaborate with your remote team to improve what you do, guided by a simple workflow. And for free!
+  .d-flex.justify-content-center
+    a.btn.btn-primary.btn-lg.py-3.px-5 href="/signup" role="button" Get started
+    a.btn.btn-outline-primary.btn-lg.py-3.px-5.ml-3 href="/howitworks" role="button" See how it works
+
+= render "_footer.html"
