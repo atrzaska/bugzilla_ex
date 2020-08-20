@@ -20,8 +20,12 @@ defmodule BugzillaWeb.Router do
     plug :put_layout, {BugzillaWeb.LayoutView, :empty}
   end
 
+  pipeline :auth_layout do
+    plug :put_layout, {BugzillaWeb.LayoutView, :auth}
+  end
+
   scope "/", BugzillaWeb do
-    pipe_through :browser
+    pipe_through [:browser, :empty_layout]
 
     get "/", ProductController, :index
   end
@@ -50,7 +54,7 @@ defmodule BugzillaWeb.Router do
   ## Authentication routes
 
   scope "/", BugzillaWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated, :empty_layout]
+    pipe_through [:browser, :redirect_if_user_is_authenticated, :auth_layout]
 
     get "/signup", UserRegistrationController, :new
     post "/signup", UserRegistrationController, :create
@@ -75,14 +79,14 @@ defmodule BugzillaWeb.Router do
   end
 
   scope "/", BugzillaWeb do
-    pipe_through [:browser]
+    pipe_through [:browser, :empty_layout]
 
     get "/privacy", PrivacyController, :index
     get "/terms", TermsController, :index
   end
 
   scope "/", BugzillaWeb do
-    pipe_through [:browser, :empty_layout]
+    pipe_through [:browser, :auth_layout]
 
     delete "/logout", UserSessionController, :delete
     get "/confirm", UserConfirmationController, :new
