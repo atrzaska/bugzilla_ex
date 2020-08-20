@@ -1,5 +1,5 @@
 = form_for @changeset, Routes.user_registration_path(@conn, :create), [class: "form-signin bg-white p-4"], fn f ->
-  h1.h3.mb-3.font-weight-normal Get started free today
+  h3.mb-3.font-weight-normal Get started free today
   p.mb-4.text-secondary No credit card required
 
   = if @changeset.action do
@@ -25,17 +25,5 @@
   .form-group
     = submit "Get started now", class: "btn btn-lg btn-primary btn-block"
 
-  p.text-center.text-secondary.mb-4 Or sign up with:
-
-  .d-flex.align-items-center.justify-content-center.mb-4
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/google.svg") title="Google" alt="Google"
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/facebook.svg") title="Facebook" alt="Facebook"
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/slack.svg") title="Slack" alt="Slack"
-    a href="/"
-      img.mx-1 src=Routes.static_path(@conn, "/images/office.svg") title="Office 365" alt="Office 365"
-
   hr
-  = link "Sign in", to: Routes.user_session_path(@conn, :new)
+  = link "Sign in", to: Routes.user_session_path(@conn, :new), class: "text-secondary text-decoration-none"
