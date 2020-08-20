@@ -5,5 +5,5 @@
 
 = unless is_nil(get_flash(@conn, :error)) do
   .toast style=("position: absolute; top: 60px; right: 40px;") data-delay="8000"
-    .toast-body.alert-error.p-3
+    .toast-body.alert-danger.p-3
       = get_flash(@conn, :error)
