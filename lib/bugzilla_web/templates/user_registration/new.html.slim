@@ -1,3 +1,5 @@
+= render_shared "_auth_header.html", assigns
+
 = form_for @changeset, Routes.user_registration_path(@conn, :create), [class: "form-signin bg-white p-4"], fn f ->
   h3.mb-3.font-weight-normal Get started free today
   p.mb-4.text-secondary No credit card required
@@ -15,15 +17,12 @@
     label.d-block.font-weight-normal.text-secondary
       = checkbox f, :terms, required: true
       | &nbsp;I agree to Bugzilla&nbsp;
-      a href="/terms" target="blank" Terms
+      a href="/terms" target="_blank" Terms
       | &nbsp;and&nbsp;
-      a href="/privacy" target="blank" Privacy Policy
+      a href="/privacy" target="_blank" Privacy Policy
   .form-group
     label.d-block.font-weight-normal.text-secondary
       = checkbox f, :news
       | &nbsp;I agree to receive Bugzilla news and updates.
   .form-group
     = submit "Get started now", class: "btn btn-lg btn-primary btn-block"
-
-  hr
-  = link "Sign in", to: Routes.user_session_path(@conn, :new), class: "text-secondary text-decoration-none"

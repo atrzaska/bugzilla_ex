@@ -1,3 +1,8 @@
+header.d-flex.align-items-center.p-4
+  a.mr-auto href="/"
+    img src=Routes.static_path(@conn, "/images/bootstrap.svg") width="48" height="48"
+  a.btn.btn-lg.btn-outline-primary href="/signup" Sign up
+
 = form_for @conn, Routes.user_session_path(@conn, :create), [as: :user, class: 'form-signin bg-white p-4'], fn f ->
   h3.mb-3.font-weight-normal Sign in
   = if @error_message do
@@ -16,9 +21,6 @@
   .form-group
     = submit "Sign in", class: "btn btn-lg btn-primary btn-block"
 
-  hr
-  = link "Sign up", to: Routes.user_registration_path(@conn, :new), class: "text-secondary text-decoration-none"
-  | &nbsp;|&nbsp;
-  = link "Forgot password?", to: Routes.user_reset_password_path(@conn, :new), class: "text-secondary text-decoration-none"
-  | &nbsp;|&nbsp;
-  = link "Didn't get confirmation email?", to: Routes.user_confirmation_path(@conn, :new), class: "text-secondary text-decoration-none"
+  a.text-secondary.text-decoration-none.mr-1 href="/recover" Forgot password?
+  br
+  a.text-secondary.text-decoration-none.mr-1 href="/confirm" Didn't get confirmation email?

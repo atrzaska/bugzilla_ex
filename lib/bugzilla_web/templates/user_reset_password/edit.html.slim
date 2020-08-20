@@ -1,3 +1,5 @@
+= render_shared "_auth_header.html", assigns
+
 = form_for @changeset, Routes.user_reset_password_path(@conn, :update, @token), [class: "form-signin bg-white p-4", method: :put, as: :user], fn f ->
   h3.mb-3.font-weight-normal Password Recovery
   p.mb-4.text-secondary Enter your new password.
@@ -14,6 +16,3 @@
     = error_tag f, :password_confirmation
   .form-group
     = submit "Reset password", class: "btn btn-lg btn-primary btn-block"
-
-  hr
-  = link "Sign in", to: Routes.user_session_path(@conn, :new), class: "text-secondary text-decoration-none"

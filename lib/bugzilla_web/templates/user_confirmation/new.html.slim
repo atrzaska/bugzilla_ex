@@ -1,3 +1,5 @@
+= render_shared "_auth_header.html", assigns
+
 = form_for :user, Routes.user_confirmation_path(@conn, :create), [class: "form-signin bg-white p-4"], fn f ->
   h3.mb-3.font-weight-normal Resend confirmation
   p.mb-4.text-secondary Enter the email you're using for your account.
@@ -6,6 +8,3 @@
     = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
   .form-group
     = submit "Continue", class: "btn btn-lg btn-primary btn-block mb-4"
-
-  hr
-  = link "Back to Sign in", to: Routes.user_session_path(@conn, :new), class: "text-secondary text-decoration-none"
