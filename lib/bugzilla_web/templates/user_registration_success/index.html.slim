@@ -1,0 +1,10 @@
+.form-signin.text-center
+  h1 Check your email
+  p.text-secondary
+    /| You're almost done! If your e-mail is in our system and it has not been confirmed yet, you will receive an email with instructions shortly. Check your email and follow the link to finish creating your account.
+    | We've sent confirmation instructions to your email address.&nbsp;
+    strong If no email is received within ten minutes, check that the submitted address is correct.
+  p.text-secondary
+    = link "Send code again", to: Routes.user_confirmation_path(@conn, :new)
+    | &nbsp;or find more information in&nbsp;
+    a href="/" Help center

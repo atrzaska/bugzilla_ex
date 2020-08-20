@@ -59,6 +59,7 @@ defmodule BugzillaWeb.Router do
     get "/recover", UserResetPasswordController, :new
     post "/recover", UserResetPasswordController, :create
     get "/recover/success", UserResetPasswordSuccessController, :index
+    get "/signup/success", UserRegistrationSuccessController, :index
     get "/reset_password/:token", UserResetPasswordController, :edit
     put "/reset_password/:token", UserResetPasswordController, :update
   end
@@ -78,9 +79,14 @@ defmodule BugzillaWeb.Router do
 
     get "/privacy", PrivacyController, :index
     get "/terms", TermsController, :index
-    delete "/users/log_out", UserSessionController, :delete
-    get "/users/confirm", UserConfirmationController, :new
-    post "/users/confirm", UserConfirmationController, :create
-    get "/users/confirm/:token", UserConfirmationController, :confirm
+  end
+
+  scope "/", BugzillaWeb do
+    pipe_through [:browser, :empty_layout]
+
+    delete "/logout", UserSessionController, :delete
+    get "/confirm", UserConfirmationController, :new
+    post "/confirm", UserConfirmationController, :create
+    get "/confirm/:token", UserConfirmationController, :confirm
   end
 end
