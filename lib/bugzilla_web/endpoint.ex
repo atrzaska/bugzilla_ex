@@ -6,7 +6,7 @@ defmodule BugzillaWeb.Endpoint do
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_bugzilla_key",
+    key: "_bugzilla_session",
     signing_salt: "od+ZqYDg"
   ]
 
