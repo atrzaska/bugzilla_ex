@@ -20,7 +20,6 @@ defmodule BugzillaWeb.UserRegistrationController do
           )
 
         conn
-        |> put_flash(:info, "User created successfully.")
         |> redirect(to: "/signup/success")
 
       {:error, %Ecto.Changeset{} = changeset} ->
