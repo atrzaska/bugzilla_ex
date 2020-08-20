@@ -39,6 +39,10 @@ defmodule BugzillaWeb do
 
       # Include shared imports and aliases for views
       unquote(view_helpers())
+
+      def render_shared(template, assigns \\ []) do
+        render(BugzillaWeb.SharedView, template, assigns)
+      end
     end
   end
 
