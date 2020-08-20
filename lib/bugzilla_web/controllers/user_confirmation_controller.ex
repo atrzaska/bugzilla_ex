@@ -2,6 +2,7 @@ defmodule BugzillaWeb.UserConfirmationController do
   use BugzillaWeb, :controller
 
   alias Bugzilla.Accounts
+  alias BugzillaWeb.UserAuth
 
   def new(conn, _params) do
     render(conn, "new.html")
@@ -29,10 +30,10 @@ defmodule BugzillaWeb.UserConfirmationController do
   # leaked token giving the user access to the account.
   def confirm(conn, %{"token" => token}) do
     case Accounts.confirm_user(token) do
-      {:ok, _} ->
+      {:ok, user} ->
         conn
         |> put_flash(:info, "Account confirmed successfully.")
-        |> redirect(to: "/")
+        |> UserAuth.log_in_user(user)
 
       :error ->
         conn
