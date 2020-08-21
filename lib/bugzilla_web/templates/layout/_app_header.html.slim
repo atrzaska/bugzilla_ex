@@ -1,19 +1,15 @@
-.d-flex.align-items-center.px-3.py-1.mb-3.border-bottom.shadow-sm.bg-white.header
+.d-flex.align-items-center.px-3.py-1.border-bottom.shadow-sm.bg-white.header
   a.mr-auto href="/"
     img src=Routes.static_path(@conn, "/images/bootstrap.svg") width="24" height="24"
-  /a.mr-auto.text-decoration-none.text-reset href=Routes.project_path(@conn, :index) Projects
   = if @current_user do
     .nav-item.dropdown
-      a.nav-link aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+      a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
         img.rounded-circle src=Routes.static_path(@conn, "/images/nobody.jpg") with="32" height="32"
       .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown"
-        a.dropdown-item href="#"  Action
-        a.dropdown-item href="#"  Another action
+        a.dropdown-item href=Routes.user_settings_path(@conn, :edit) Settings
+        a.dropdown-item href="/help" Help
         .dropdown-divider
-        a.dropdown-item href="#"  Something else here
-
-    /a.mr-3.p-2.text-dark href=Routes.user_settings_path(@conn, :edit) Settings
-    /= link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "btn btn-outline-primary"
+        = link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item"
   - else
     a.mr-3.p-2 href=Routes.user_session_path(@conn, :new) Log in
     a.btn.btn-primary href=Routes.user_registration_path(@conn, :new) Sign up free →
