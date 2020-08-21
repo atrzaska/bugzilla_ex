@@ -1,6 +1,10 @@
 @import "./utils";
+@import "./sidebar";
+@import "./header";
+@import "./bootstrap_custom";
 
-.card {
-  box-shadow: 0 2px 2px rgba(0,0,0,.16);
-  padding: 1.5rem;
+.wrapper {
+  margin-left: 50px;
+  margin-top: 48px;
 }
+
