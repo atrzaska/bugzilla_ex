@@ -1,0 +1,10 @@
+h1 Show Project
+
+.form-group
+  strong.mr-1 Name:
+  span = @project.name
+
+.form-group
+  a.btn.btn-primary href=Routes.project_path(@conn, :edit, @project) Edit
+.form-group
+  a href=Routes.project_path(@conn, :index) Back

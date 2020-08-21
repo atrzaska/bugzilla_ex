@@ -1,0 +1,14 @@
+= form_for @changeset, @action, fn f ->
+  = if @changeset.action do
+    .alert.alert-danger
+      p Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :name, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = text_input f, :name, required: true, class: "form-control #{ invalid_field_class(f, :email) }", placeholder: "Email"
+      = error_tag f, :name
+
+  .form-group.row
+    .col-sm-10
+      = submit "Save", class: "btn btn-primary"

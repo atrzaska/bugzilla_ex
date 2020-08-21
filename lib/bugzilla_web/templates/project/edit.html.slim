@@ -1,0 +1,6 @@
+h1.mb-4 Edit Project
+
+= render "form.html", Map.put(assigns, :action, Routes.project_path(@conn, :update, @project))
+
+.form-group
+  a href=Routes.project_path(@conn, :index) Back

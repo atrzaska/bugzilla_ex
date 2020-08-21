@@ -1,0 +1,6 @@
+h1.mb-4 New Project
+
+= render "form.html", Map.put(assigns, :action, Routes.project_path(@conn, :create))
+
+.form-group
+  a href=Routes.project_path(@conn, :index) Back
