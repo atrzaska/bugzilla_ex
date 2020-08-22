@@ -1,10 +1,8 @@
-h1 Show Project
+.d-flex.justify-content-between.align-items-center.mb-4
+  h1.mr-auto = @project.name
+  a.mr-2 href=Routes.project_path(@conn, :index) Back
+  a.btn.btn-primary href=Routes.project_path(@conn, :edit, @project) Edit
 
 .form-group
   strong.mr-1 Name:
   span = @project.name
-
-.form-group
-  a.btn.btn-primary href=Routes.project_path(@conn, :edit, @project) Edit
-.form-group
-  a href=Routes.project_path(@conn, :index) Back
