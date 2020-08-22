@@ -19,10 +19,12 @@ h3.mb-4 Change e-mail
       = error_tag f, :current_password
 
   .form-group.row
+    .col-sm-2
     .col-sm-10
       = submit "Change e-mail", class: "btn btn-primary"
 
-h3.my-4 Change password
+hr.my-4
+h3.mb-4 Change password
 
 = form_for @password_changeset, Routes.user_settings_path(@conn, :update_password), fn f ->
   = if @password_changeset.action do
@@ -48,5 +50,6 @@ h3.my-4 Change password
         = error_tag f, :password_confirmation
 
   .form-group.row
+    .col-sm-2
     .col-sm-10
       = submit "Change password", class: "btn btn-primary"
