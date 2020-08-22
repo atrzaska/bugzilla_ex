@@ -1,8 +1,6 @@
 .sidebar.d-flex.flex-column
   .sidebar-header
-  .sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Dashboard"
-    a href=Routes.dashboard_path(@conn, :index)
-      i.fas.fa-desktop.gray-2
-  .sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Projects"
-    a href=Routes.project_path(@conn, :index)
-      i.fas.fa-table.gray-2
+  a.sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Dashboard" href=Routes.dashboard_path(@conn, :index)
+    i.fas.fa-desktop.gray-2
+  a.sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Projects" href=Routes.project_path(@conn, :index)
+    i.fas.fa-table.gray-2
