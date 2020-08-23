@@ -3,7 +3,6 @@ defmodule BugzillaWeb.UserRegistrationController do
 
   alias Bugzilla.Accounts
   alias Bugzilla.Accounts.User
-  alias BugzillaWeb.UserAuth
 
   def new(conn, _params) do
     changeset = Accounts.change_user_registration(%User{})
