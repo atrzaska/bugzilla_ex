@@ -71,7 +71,19 @@ defmodule BugzillaWeb.Router do
   scope "/", BugzillaWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    resources "/projects", ProjectController
+    resources "/projects", ProjectController do
+      resources "/members", UserProjectController
+
+      get "/stories/current", StoryController, :current
+      get "/stories/backlog", StoryController, :backlog
+      get "/stories/icebox", StoryController, :icebox
+      get "/stories/done", StoryController, :done
+    end
+
+    resources "/stories", StoryController
+    resources "/tasks", TaskController
+    resources "/comments", CommentController
+
     get "/dashboard", DashboardController, :index
     get "/users/settings", UserSettingsController, :edit
     put "/users/settings/update_password", UserSettingsController, :update_password

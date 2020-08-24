@@ -5,12 +5,18 @@ defmodule Bugzilla.Stories.Story do
   alias Bugzilla.Projects.Project
   alias Bugzilla.Accounts.User
 
+  import EctoEnum
+
+  defenum State, ["unstarted", "started", "finised", "delivered", "accepted", "rejected"]
+  defenum Type, ["feature", "bug", "chore", "release"]
+  defenum Container, ["icebox", "backlog"]
+
   schema "stories" do
     field :name, :string
-    field :state, :integer
+    field :state, State
     field :description, :string
-    field :story_type, :integer
-    field :container, :integer
+    field :story_type, Type
+    field :container, Container
     field :tasks_count, :integer
     field :comments_count, :integer
 
