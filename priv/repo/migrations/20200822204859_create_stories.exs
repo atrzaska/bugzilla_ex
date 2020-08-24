@@ -7,11 +7,11 @@ defmodule Bugzilla.Repo.Migrations.CreateStories do
       add :state, :integer
       add :description, :string
       add :story_type, :integer
-      add :project_id, references(:projects)
       add :container, :integer
-      add :creator_id, references(:users)
       add :tasks_count, :integer
       add :comments_count, :integer
+      add :project_id, references(:projects)
+      add :creator_id, references(:users)
 
       timestamps()
     end
