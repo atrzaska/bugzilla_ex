@@ -2,12 +2,21 @@ defmodule Bugzilla.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @derive {Inspect, except: [:password]}
+  alias Bugzilla.Comments.Comment
+  alias Bugzilla.Projects.Project
+  alias Bugzilla.Stories.Story
+  alias Bugzilla.UserProjects.UserProject
+
   schema "users" do
     field :email, :string
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+
+    has_many :comments, Comment
+    has_many :projects, Project, foreign_key: :creator_id
+    has_many :stories, Story, foreign_key: :creator_id
+    has_many :user_projects, UserProject
 
     timestamps()
   end
