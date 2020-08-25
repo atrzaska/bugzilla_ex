@@ -6,7 +6,7 @@
   .form-group.row
     = label f, :name, class: "col-sm-2 col-form-label"
     .col-sm-10
-      = text_input f, :name, required: true, class: "form-control #{ invalid_field_class(f, :email) }", placeholder: "Email"
+      = text_input f, :name, required: true, class: "form-control #{ invalid_field_class(f, :name) }", placeholder: "Name"
       = error_tag f, :name
 
   .form-group.row
