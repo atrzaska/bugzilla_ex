@@ -8,6 +8,10 @@ defmodule Bugzilla.Projects do
     from(p in Project, where: p.creator_id == ^user.id) |> Repo.all
   end
 
+  def list_for_select(user: user) do
+    from(p in Project, where: p.creator_id == ^user.id, select: {p.name, p.id}) |> Repo.all
+  end
+
   def list_projects do
     Repo.all(Project)
   end
