@@ -1,0 +1,46 @@
+= form_for @changeset, @action, fn f ->
+  = if @changeset.action do
+    .alert.alert-danger
+      p Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :name, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = text_input f, :name, required: true, class: "form-control #{ invalid_field_class(f, :name) }", placeholder: "Name"
+      = error_tag f, :name
+
+  .form-group.row
+    = label f, :state, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = select f, :state, states, required: true, class: "form-control #{ invalid_field_class(f, :state) }"
+      = error_tag f, :state
+
+  .form-group.row
+    = label f, :description, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = text_input f, :description, required: true, class: "form-control #{ invalid_field_class(f, :description) }", placeholder: "Description"
+      = error_tag f, :description
+
+  .form-group.row
+    = label f, :story_type, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = select f, :story_type, types, required: true, class: "form-control #{ invalid_field_class(f, :story_type) }"
+      = error_tag f, :story_type
+
+  .form-group.row
+    = label f, :container, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = select f, :container, containers, required: true, class: "form-control #{ invalid_field_class(f, :container) }"
+      = error_tag f, :container
+
+  .form-group.row
+    = label f, :project_id, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = select f, :project_id, projects(@conn), required: true, class: "form-control #{ invalid_field_class(f, :container) }"
+      = error_tag f, :project_id
+
+  .form-group.row
+    .col-sm-2
+    .col-sm-10
+      = submit "Save", class: "btn btn-primary mr-2"
+      a.btn.btn-primary.btn-outline-secondary href=Routes.story_path(@conn, :index) Back

@@ -2,6 +2,7 @@ defmodule BugzillaWeb.StoryController do
   use BugzillaWeb, :controller
 
   alias Bugzilla.Stories
+  alias Bugzilla.Projects
   alias Bugzilla.Stories.Story
 
   def index(conn, _params) do
@@ -15,11 +16,14 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def create(conn, %{"story" => story_params}) do
-    case Stories.create_story(story_params) do
+    user = conn.assigns.current_user
+    project_id = story_params["project_id"]
+    project = Projects.get_project!(project_id, user: user)
+    case Stories.create_story(story_params, user: user, project: project) do
       {:ok, story} ->
         conn
         |> put_flash(:info, "Story created successfully.")
-        |> redirect(to: Routes.story_path(conn, :show, story))
+        |> redirect(to: Routes.story_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -44,7 +48,7 @@ defmodule BugzillaWeb.StoryController do
       {:ok, story} ->
         conn
         |> put_flash(:info, "Story updated successfully.")
-        |> redirect(to: Routes.story_path(conn, :show, story))
+        |> redirect(to: Routes.story_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", story: story, changeset: changeset)
