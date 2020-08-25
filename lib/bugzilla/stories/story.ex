@@ -7,7 +7,7 @@ defmodule Bugzilla.Stories.Story do
 
   import EctoEnum
 
-  defenum State, ["unstarted", "started", "finised", "delivered", "accepted", "rejected"]
+  defenum State, ["unstarted", "started", "finished", "delivered", "accepted", "rejected"]
   defenum Type, ["feature", "bug", "chore", "release"]
   defenum Container, ["icebox", "backlog"]
 
@@ -29,7 +29,7 @@ defmodule Bugzilla.Stories.Story do
   @doc false
   def changeset(story, attrs) do
     story
-    |> cast(attrs, [:name])
-    |> validate_required([:name])
+    |> cast(attrs, [:name, :state, :description, :story_type, :container, :project_id])
+    |> validate_required([:name, :state, :description, :story_type, :container, :project_id])
   end
 end
