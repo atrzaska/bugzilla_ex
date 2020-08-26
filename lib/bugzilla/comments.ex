@@ -8,10 +8,14 @@ defmodule Bugzilla.Comments do
     Repo.all(Comment)
   end
 
+  def get_comment!(id, user: user) do
+    Comment |> Repo.get_by!(user_id: user.id, id: id)
+  end
+
   def get_comment!(id), do: Repo.get!(Comment, id)
 
-  def create_comment(attrs \\ %{}) do
-    %Comment{}
+  def create_comment(attrs \\ %{}, user: user) do
+    %Comment{user_id: user.id}
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end
