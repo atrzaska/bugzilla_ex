@@ -1,8 +1,10 @@
-.sidebar.d-flex.flex-column
+aside.sidebar.d-flex.flex-column
   .sidebar-header
   a.sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Dashboard" href=Routes.dashboard_path(@conn, :index)
     i.fas.fa-desktop.gray-2
   a.sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Projects" href=Routes.project_path(@conn, :index)
     i.fas.fa-table.gray-2
   a.sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Stories" href=Routes.story_path(@conn, :index)
-    i.fas.fa-calendar.gray-2
+    i.fas.fa-list.gray-2
+  a.sidebar-item.d-flex.justify-content-center.align-items-center data-toggle="tooltip" data-placement="right" title="Comments" href=Routes.comment_path(@conn, :index)
+    i.fas.fa-comments.gray-2

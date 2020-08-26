@@ -10,3 +10,10 @@
 .btn-outline-gray:hover {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
 }
+
+.toast {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  z-index: 2;
+}
