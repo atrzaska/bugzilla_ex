@@ -49,7 +49,7 @@ defmodule BugzillaWeb.UserProjectController do
       {:ok, user_project} ->
         conn
         |> put_flash(:info, "UserProject updated successfully.")
-        |> redirect(to: Routes.project_user_project_path(conn, :show, project_id, user_project))
+        |> redirect(to: Routes.project_user_project_path(conn, :index, project_id, user_project))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user_project: user_project, changeset: changeset)
