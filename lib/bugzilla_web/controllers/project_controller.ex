@@ -19,7 +19,7 @@ defmodule BugzillaWeb.ProjectController do
       {:ok, project} ->
         conn
         |> put_flash(:info, "Project created successfully.")
-        |> redirect(to: Routes.project_path(conn, :show, project))
+        |> redirect(to: Routes.project_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
@@ -44,7 +44,7 @@ defmodule BugzillaWeb.ProjectController do
       {:ok, project} ->
         conn
         |> put_flash(:info, "Project updated successfully.")
-        |> redirect(to: Routes.project_path(conn, :show, project))
+        |> redirect(to: Routes.project_path(conn, :index))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", project: project, changeset: changeset)
