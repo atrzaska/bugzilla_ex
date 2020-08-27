@@ -11,7 +11,8 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def new(conn, _params) do
-    changeset = Stories.change_story(%Story{})
+    user = conn.assigns.current_user
+    changeset = Stories.change_story(%Story{creator_id: user.id})
     render(conn, "new.html", changeset: changeset)
   end
 
@@ -19,6 +20,7 @@ defmodule BugzillaWeb.StoryController do
     user = conn.assigns.current_user
     project_id = story_params["project_id"]
     project = Projects.get_project!(project_id, user: user)
+
     case Stories.create_story(story_params, user: user, project: project) do
       {:ok, story} ->
         conn
@@ -42,7 +44,10 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def update(conn, %{"id" => id, "story" => story_params}) do
-    story = Stories.get_story!(id)
+    user = conn.assigns.current_user
+    project_id = story_params["project_id"]
+    project = Projects.get_project!(project_id, user: user)
+    story = Stories.get_story!(id, project: project)
 
     case Stories.update_story(story, story_params) do
       {:ok, story} ->
