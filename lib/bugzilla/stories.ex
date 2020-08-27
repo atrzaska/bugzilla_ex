@@ -3,9 +3,22 @@ defmodule Bugzilla.Stories do
   alias Bugzilla.Repo
 
   alias Bugzilla.Stories.Story
+  alias Bugzilla.Projects.Project
 
   def list_stories do
     Repo.all(Story)
+  end
+
+  def list_for_select(user: user) do
+    from(s in Story, join: p in Project, on: s.project_id == p.id, where: p.creator_id == ^user.id, select: {s.name, s.id}) |> Repo.all
+  end
+
+  def get_story!(id, user: user) do
+    Story |> Repo.get_by!(creator_id: user.id, id: id)
+  end
+
+  def get_story!(id, project: project) do
+    Story |> Repo.get_by!(project_id: project.id, id: id)
   end
 
   def get_story!(id), do: Repo.get!(Story, id)
