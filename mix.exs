@@ -48,7 +48,9 @@ defmodule Bugzilla.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phx_gen_auth, "~> 0.4.0", only: [:dev], runtime: false},
       {:phoenix_slime, "~> 0.13.1"},
-      {:ecto_enum, "~> 1.4"}
+      {:ecto_enum, "~> 1.4"},
+      {:phoenix_active_link, "~> 0.2.1"},
+      {:navigation_history, "~> 0.3"}
     ]
   end
 
