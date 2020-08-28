@@ -6,9 +6,14 @@ header.header.d-flex.align-items-center.px-3.py-1.border-bottom.shadow-sm.bg-whi
       a aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
         img.rounded-circle src=Routes.static_path(@conn, "/images/nobody.jpg") with="32" height="32"
       .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown"
-        a.dropdown-item href=Routes.user_settings_path(@conn, :edit) Settings
-        a.dropdown-item href="/help" Help
+        .d-flex.align-items-center.px-3
+          img.rounded-circle.mr-3 src=Routes.static_path(@conn, "/images/nobody.jpg") with="80" height="80"
+          .d-flex.flex-column
+            b = @current_user.name
+            .text-secondary = @current_user.email
         .dropdown-divider
+        a.dropdown-item href=Routes.user_settings_path(@conn, :edit) Profile
+        a.dropdown-item href="/help" Help
         = link "Log out", to: Routes.user_session_path(@conn, :delete), method: :delete, class: "dropdown-item"
   - else
     a.mr-3.p-2 href=Routes.user_session_path(@conn, :new) Log in
