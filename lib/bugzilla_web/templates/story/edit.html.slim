@@ -1,3 +1,3 @@
 h1.mb-4 Edit Story
 
-= render "form.html", Map.put(assigns, :action, Routes.story_path(@conn, :update, @story))
+= render "form.html", Map.put(assigns, :action, Routes.project_story_path(@conn, :update, @project, @story))
