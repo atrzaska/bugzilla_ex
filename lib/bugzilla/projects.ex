@@ -3,27 +3,30 @@ defmodule Bugzilla.Projects do
 
   alias Bugzilla.Repo
   alias Bugzilla.Projects.Project
+  alias Bugzilla.UserProjects.UserProject
 
   def list_projects(user: user) do
-    from(p in Project, where: p.creator_id == ^user.id) |> Repo.all
+    from(p in Project,
+      join: u in UserProject,
+      on: u.project_id == p.id,
+      where: u.user_id == ^user.id
+    ) |> Repo.all
   end
 
   def list_projects do
     Repo.all(Project)
   end
 
-  def list_for_select(user: user) do
-    from(p in Project, where: p.creator_id == ^user.id, select: {p.name, p.id}) |> Repo.all
-  end
-
   def get_project!(id, user: user) do
-    Project |> Repo.get_by!(creator_id: user.id, id: id)
+    from(p in Project,
+      join: u in UserProject, on: u.project_id == p.id,
+      where: u.user_id == ^user.id,
+      where: p.id == ^id
+    ) |> Repo.one
   end
 
-  def get_project!(id), do: Repo.get!(Project, id)
-
-  def create_project(attrs \\ %{}, user: user) do
-    %Project{creator_id: user.id}
+  def create_project(attrs \\ %{}) do
+    %Project{}
     |> Project.changeset(attrs)
     |> Repo.insert()
   end

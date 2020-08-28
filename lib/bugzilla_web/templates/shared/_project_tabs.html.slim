@@ -1,0 +1,6 @@
+ul.nav.nav-tabs
+  = bootstrap_nav_item @conn, "Current", to: Routes.project_story_path(@conn, :current, @project)
+  = bootstrap_nav_item @conn, "Backlog", to: Routes.project_story_path(@conn, :backlog, @project)
+  = bootstrap_nav_item @conn, "Icebox", to: Routes.project_story_path(@conn, :icebox, @project)
+  = bootstrap_nav_item @conn, "Done", to: Routes.project_story_path(@conn, :done, @project)
+  = bootstrap_nav_item @conn, "Members", to: Routes.project_people_path(@conn, :index, @project)
