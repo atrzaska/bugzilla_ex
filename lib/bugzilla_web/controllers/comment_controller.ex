@@ -47,7 +47,7 @@ defmodule BugzillaWeb.CommentController do
     comment = Comments.get_comment!(id, user: user)
 
     case Comments.update_comment(comment, comment_params) do
-      {:ok, comment} ->
+      {:ok, _comment} ->
         conn
         |> put_flash(:info, "Comment updated successfully.")
         |> redirect(to: Routes.comment_path(conn, :index))

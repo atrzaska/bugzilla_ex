@@ -16,7 +16,7 @@ defmodule BugzillaWeb.TaskController do
 
   def create(conn, %{"task" => task_params}) do
     case Tasks.create_task(task_params) do
-      {:ok, task} ->
+      {:ok, _task} ->
         conn
         |> put_flash(:info, "Task created successfully.")
         |> redirect(to: Routes.task_path(conn, :index))
@@ -41,7 +41,7 @@ defmodule BugzillaWeb.TaskController do
     task = Tasks.get_task!(id)
 
     case Tasks.update_task(task, task_params) do
-      {:ok, task} ->
+      {:ok, _task} ->
         conn
         |> put_flash(:info, "Task updated successfully.")
         |> redirect(to: Routes.task_path(conn, :index))
