@@ -72,13 +72,13 @@ defmodule BugzillaWeb.Router do
   scope "/", BugzillaWeb do
     pipe_through [:browser, :require_authenticated_user]
 
-    resources "/projects", ProjectController do
-      resources "/people", PeopleController
+    resources "/projects", ProjectController, except: [:show] do
+      resources "/people", PeopleController, except: [:show]
 
-      get "/stories/current", StoryController, :current
-      get "/stories/backlog", StoryController, :backlog
-      get "/stories/icebox", StoryController, :icebox
-      get "/stories/done", StoryController, :done
+      get "/current", StoryController, :current
+      get "/backlog", StoryController, :backlog
+      get "/icebox", StoryController, :icebox
+      get "/done", StoryController, :done
 
       resources "/stories", StoryController
     end
