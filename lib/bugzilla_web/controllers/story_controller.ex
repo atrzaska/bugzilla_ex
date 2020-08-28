@@ -5,67 +5,100 @@ defmodule BugzillaWeb.StoryController do
   alias Bugzilla.Projects
   alias Bugzilla.Stories.Story
 
-  def index(conn, _params) do
-    stories = Stories.list_stories()
-    render(conn, "index.html", stories: stories)
+  def current(conn, %{"project_id" => project_id}) do
+    user = conn.assigns.current_user
+    project = Projects.get_project!(project_id, user: user)
+    IO.inspect(project_id)
+    stories = Stories.list_current_stories(project: project)
+    render(conn, "current.html", stories: stories, project: project)
   end
 
-  def new(conn, _params) do
+  def backlog(conn, %{"project_id" => project_id}) do
     user = conn.assigns.current_user
-    changeset = Stories.change_story(%Story{creator_id: user.id})
-    render(conn, "new.html", changeset: changeset)
+    project = Projects.get_project!(project_id, user: user)
+    stories = Stories.list_backlog_stories(project: project)
+    render(conn, "backlog.html", stories: stories, project: project)
   end
 
-  def create(conn, %{"story" => story_params}) do
+  def icebox(conn, %{"project_id" => project_id}) do
     user = conn.assigns.current_user
-    project_id = story_params["project_id"]
+    project = Projects.get_project!(project_id, user: user)
+    stories = Stories.list_icebox_stories(project: project)
+    render(conn, "icebox.html", stories: stories, project: project)
+  end
+
+  def done(conn, %{"project_id" => project_id}) do
+    user = conn.assigns.current_user
+    project = Projects.get_project!(project_id, user: user)
+    stories = Stories.list_done_stories(project: project)
+    render(conn, "done.html", stories: stories, project: project)
+  end
+
+  def new(conn, %{"project_id" => project_id}) do
+    user = conn.assigns.current_user
+    project = Projects.get_project!(project_id, user: user)
+
+    changeset = Stories.change_story(%Story{creator_id: user.id, project: project.id})
+    render(conn, "new.html", changeset: changeset, project: project)
+  end
+
+  def create(conn, %{"project_id" => project_id, "story" => story_params}) do
+    user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
 
     case Stories.create_story(story_params, user: user, project: project) do
-      {:ok, story} ->
+      {:ok, _story} ->
         conn
         |> put_flash(:info, "Story created successfully.")
-        |> redirect(to: Routes.story_path(conn, :index))
+        |> redirect(to: Routes.project_story_path(conn, :icebox, project))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        render(conn, "new.html", changeset: changeset, project: project)
     end
   end
 
-  def show(conn, %{"id" => id}) do
-    story = Stories.get_story!(id)
-    render(conn, "show.html", story: story)
-  end
-
-  def edit(conn, %{"id" => id}) do
-    story = Stories.get_story!(id)
-    changeset = Stories.change_story(story)
-    render(conn, "edit.html", story: story, changeset: changeset)
-  end
-
-  def update(conn, %{"id" => id, "story" => story_params}) do
+  def show(conn, %{"project_id" => project_id, "id" => id}) do
     user = conn.assigns.current_user
-    project_id = story_params["project_id"]
+    project = Projects.get_project!(project_id, user: user)
+    story = Stories.get_story!(id, project: project)
+
+    render(conn, "show.html", story: story, project: project)
+  end
+
+  def edit(conn, %{"project_id" => project_id, "id" => id}) do
+    user = conn.assigns.current_user
+    project = Projects.get_project!(project_id, user: user)
+    story = Stories.get_story!(id, project: project)
+
+    changeset = Stories.change_story(story)
+    render(conn, "edit.html", story: story, changeset: changeset, project: project)
+  end
+
+  def update(conn, %{"project_id" => project_id, "id" => id, "story" => story_params}) do
+    user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
 
     case Stories.update_story(story, story_params) do
-      {:ok, story} ->
+      {:ok, _story} ->
         conn
         |> put_flash(:info, "Story updated successfully.")
-        |> redirect(to: Routes.story_path(conn, :index))
+        |> redirect_back(default: Routes.project_story_path(conn, :current, project))
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", story: story, changeset: changeset)
+        render(conn, "edit.html", story: story, changeset: changeset, project: project)
     end
   end
 
-  def delete(conn, %{"id" => id}) do
-    story = Stories.get_story!(id)
+  def delete(conn, %{"project_id" => project_id, "id" => id}) do
+    user = conn.assigns.current_user
+    project = Projects.get_project!(project_id, user: user)
+    story = Stories.get_story!(id, project: project)
+
     {:ok, _story} = Stories.delete_story(story)
 
     conn
     |> put_flash(:info, "Story deleted successfully.")
-    |> redirect(to: Routes.story_path(conn, :index))
+    |> redirect_back(default: Routes.project_story_path(conn, :current, project))
   end
 end
