@@ -5,7 +5,7 @@ defmodule Bugzilla.UserProjects do
   alias Bugzilla.UserProjects.UserProject
 
   def list_user_projects(project: project) do
-    from(p in UserProject, where: p.project_id == ^project.id) |> Repo.all
+    from(p in UserProject, where: p.project_id == ^project.id, preload: [:user]) |> Repo.all
   end
 
   def list_user_projects do
@@ -13,15 +13,17 @@ defmodule Bugzilla.UserProjects do
   end
 
   def get_user_project!(id, project: project) do
-    UserProject |> Repo.get_by!(project_id: project.id, id: id)
+    UserProject |> Repo.get_by!(project_id: project.id, id: id) |> Repo.preload(:user)
   end
-
-  def get_user_project!(id), do: Repo.get!(UserProject, id)
 
   def create_user_project(attrs \\ %{}, project: project) do
     %UserProject{project_id: project.id}
     |> UserProject.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def create_owner(project: project, user: user) do
+    %UserProject{project_id: project.id, user_id: user.id, role: :owner} |> Repo.insert()
   end
 
   def update_user_project(%UserProject{} = user_project, attrs) do
@@ -36,5 +38,17 @@ defmodule Bugzilla.UserProjects do
 
   def change_user_project(%UserProject{} = user_project, attrs \\ %{}) do
     UserProject.changeset(user_project, attrs)
+  end
+
+  def role(user: user, project: project) do
+    from(u in UserProject,
+      where: u.user_id == ^user.id,
+      where: u.project_id == ^project.id,
+      select: {u.role}
+    ) |> Repo.one() |> elem(0)
+  end
+
+  def owner?(user: user, project: project) do
+    role(user: user, project: project) == :owner
   end
 end

@@ -1,0 +1,4 @@
+h1.mb-4 Change role of #{ @user_project.user.name }
+p.text-secondary Select a new role
+
+= render "_edit_form.html", Map.put(assigns, :action, Routes.project_people_path(@conn, :update, @project, @user_project))

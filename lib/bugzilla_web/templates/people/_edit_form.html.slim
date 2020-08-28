@@ -1,0 +1,16 @@
+= form_for @changeset, @action, fn f ->
+  = if @changeset.action do
+    .alert.alert-danger
+      p Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :role, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = select f, :role, roles(), required: true, class: "form-control #{ invalid_field_class(f, :name) }"
+      = error_tag f, :role
+
+  .form-group.row
+    .col-sm-2
+    .col-sm-10
+      = submit "Change role", class: "btn btn-primary mr-2"
+      a.btn.btn-primary.btn-outline-secondary href=Routes.project_people_path(@conn, :index, @project) Back
