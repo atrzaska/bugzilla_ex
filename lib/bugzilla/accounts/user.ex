@@ -12,6 +12,9 @@ defmodule Bugzilla.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    field :name, :string
+    field :terms_accepted, :boolean
+    field :receive_news_and_updates, :boolean
 
     has_many :comments, Comment
     has_many :stories, Story, foreign_key: :creator_id
@@ -31,7 +34,8 @@ defmodule Bugzilla.Accounts.User do
   """
   def registration_changeset(user, attrs) do
     user
-    |> cast(attrs, [:email, :password])
+    |> cast(attrs, [:email, :password, :name, :terms_accepted, :receive_news_and_updates])
+    |> validate_required([:name, :terms_accepted])
     |> validate_email()
     |> validate_password()
   end

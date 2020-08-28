@@ -9,20 +9,25 @@
       p.mb-0 Oops, something went wrong! Please check the errors below.
 
   .form-group
-    = email_input f, :email, required: true, class: "form-control #{ invalid_field_class(f, :email) }", placeholder: "Email address"
+    = text_input f, :name, required: true, class: "form-control #{ invalid_field_class(f, :name) }", placeholder: "Name", autocomplete: "off"
+    = error_tag f, :name
+    = email_input f, :email, required: true, class: "form-control #{ invalid_field_class(f, :email) }", placeholder: "Email address", autocomplete: "off"
     = error_tag f, :email
-    = password_input f, :password, required: true, class: "form-control #{ invalid_field_class(f, :password) }", placeholder: "Password"
+    = password_input f, :password, required: true, class: "form-control #{ invalid_field_class(f, :password) }", placeholder: "Password 8+ characters", autocomplete: "off"
     = error_tag f, :password
+
   .form-group
     label.d-block.font-weight-normal.text-secondary
-      = checkbox f, :terms, required: true
+      = checkbox f, :terms_accepted, required: true
       | &nbsp;I agree to Bugzilla&nbsp;
       a href="/terms" target="_blank" Terms
       | &nbsp;and&nbsp;
       a href="/privacy" target="_blank" Privacy Policy
+
   .form-group
     label.d-block.font-weight-normal.text-secondary
-      = checkbox f, :news
+      = checkbox f, :receive_news_and_updates
       | &nbsp;I agree to receive Bugzilla news and updates.
+
   .form-group
     = submit "Get started now", class: "btn btn-lg btn-primary btn-block"
