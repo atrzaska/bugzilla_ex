@@ -73,15 +73,16 @@ defmodule BugzillaWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     resources "/projects", ProjectController do
-      resources "/members", UserProjectController
+      resources "/people", PeopleController
 
       get "/stories/current", StoryController, :current
       get "/stories/backlog", StoryController, :backlog
       get "/stories/icebox", StoryController, :icebox
       get "/stories/done", StoryController, :done
+
+      resources "/stories", StoryController
     end
 
-    resources "/stories", StoryController
     resources "/tasks", TaskController
     resources "/comments", CommentController
 
