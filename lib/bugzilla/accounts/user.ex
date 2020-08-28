@@ -14,9 +14,9 @@ defmodule Bugzilla.Accounts.User do
     field :confirmed_at, :naive_datetime
 
     has_many :comments, Comment
-    has_many :projects, Project, foreign_key: :creator_id
     has_many :stories, Story, foreign_key: :creator_id
     has_many :user_projects, UserProject
+    many_to_many :projects, Project, join_through: "user_projects"
 
     timestamps()
   end
