@@ -7,7 +7,8 @@ defmodule Bugzilla.Projects.Project do
   schema "projects" do
     field :name, :string
 
-    belongs_to :creator, User
+    many_to_many :users, User, join_through: "user_projects"
+
     timestamps()
   end
 
