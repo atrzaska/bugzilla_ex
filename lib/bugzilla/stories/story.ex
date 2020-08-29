@@ -30,6 +30,6 @@ defmodule Bugzilla.Stories.Story do
   def changeset(story, attrs) do
     story
     |> cast(attrs, [:name, :state, :description, :story_type, :container])
-    |> validate_required([:name, :state, :description, :story_type, :container])
+    |> validate_required([:name, :description])
   end
 end
