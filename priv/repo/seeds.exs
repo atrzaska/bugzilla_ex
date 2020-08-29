@@ -23,7 +23,7 @@ User |> Repo.delete_all()
 
 {:ok, john} = Accounts.register_user(%{
   "name" => "John Doe",
-  "email" => "john@bugzilla.com",
+  "email" => "john@bugzilla.app",
   "password" => "password",
   "terms_accepted" => "true",
   "receive_news_and_updates" => "true"
@@ -31,7 +31,7 @@ User |> Repo.delete_all()
 
 {:ok, jane} = Accounts.register_user(%{
   "name" => "Jane Doe",
-  "email" => "jane@bugzilla.com",
+  "email" => "jane@bugzilla.app",
   "password" => "password",
   "terms_accepted" => "true",
   "receive_news_and_updates" => "true"
