@@ -66,12 +66,17 @@ defmodule BugzillaWeb.PeopleController do
   def delete(conn, %{"id" => id, "project_id" => project_id}) do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
-    user_project = UserProjects.get_user_project!(id)
-
+    user_project = UserProjects.get_user_project!(id, project: project)
     {:ok, _user_project} = UserProjects.delete_user_project(user_project)
 
-    conn
-    |> put_flash(:info, "Member deleted successfully.")
-    |> redirect(to: Routes.project_people_path(conn, :index, project_id))
+    if user.id == user_project.user_id do
+      conn
+      |> put_flash(:info, "Project left successfully.")
+      |> redirect(to: Routes.project_path(conn, :index))
+    else
+      conn
+      |> put_flash(:info, "Member deleted successfully.")
+      |> redirect(to: Routes.project_people_path(conn, :index, project_id))
+    end
   end
 end
