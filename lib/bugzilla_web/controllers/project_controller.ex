@@ -13,7 +13,7 @@ defmodule BugzillaWeb.ProjectController do
   end
 
   def new(conn, _params) do
-    changeset = Project.changeset(%Project{})
+    changeset = Projects.change_project(%Project{})
     render(conn, "new.html", changeset: changeset)
   end
 
