@@ -6,7 +6,15 @@
   .form-group.row
     = label f, :role, class: "col-sm-2 col-form-label"
     .col-sm-10
-      = select f, :role, roles(), required: true, class: "form-control #{ invalid_field_class(f, :name) }"
+      .d-flex.flex-column
+        label.form-check-label.mb-3
+          = radio_button f, :role, :member, required: true, class: "form-check form-check-inline #{ invalid_field_class(f, :name) }"
+          b Member
+          .text-secondary Has full administrative access to the entire project.
+        label.form-check-label
+          = radio_button f, :role, :owner, required: true, class: "form-check form-check-inline #{ invalid_field_class(f, :name) }"
+          b Owner
+          .text-secondary Can see every member and create new stories.
       = error_tag f, :role
 
   .form-group.row
