@@ -10,8 +10,8 @@ defmodule Bugzilla.Repo.Migrations.CreateStories do
       add :container, :integer
       add :tasks_count, :integer
       add :comments_count, :integer
-      add :project_id, references(:projects)
-      add :creator_id, references(:users)
+      add :project_id, references(:projects, on_delete: :delete_all)
+      add :creator_id, references(:users, on_delete: :delete_all)
 
       timestamps()
     end

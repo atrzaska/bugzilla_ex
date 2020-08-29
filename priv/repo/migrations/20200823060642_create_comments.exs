@@ -4,7 +4,7 @@ defmodule Bugzilla.Repo.Migrations.CreateComments do
   def change do
     create table(:comments) do
       add :content, :text
-      add :story_id, references(:stories)
+      add :story_id, references(:stories, on_delete: :delete_all)
 
       timestamps()
     end
