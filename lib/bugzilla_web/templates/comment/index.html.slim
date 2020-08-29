@@ -14,10 +14,10 @@ table.table
           a href=Routes.comment_path(@conn, :edit, comment)
             = comment.content
         td
-          .nav-item.dropdown
-            a.nav-link.btn.btn-outline-primary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+          .dropdown
+            a.btn.btn-outline-primary.dropdown-toggle data-toggle="dropdown"
               i.fas.fa-cog
-            .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown"
+            .dropdown-menu.dropdown-menu-right
               a.dropdown-item href=Routes.comment_path(@conn, :edit, comment) Edit
               .dropdown-divider
               = link "Remove", to: Routes.comment_path(@conn, :delete, comment), method: :delete, data: [confirm: "Are you sure?"], class: "dropdown-item"

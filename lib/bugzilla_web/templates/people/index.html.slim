@@ -26,10 +26,10 @@ table.table
         td = user_project.role
         td
           = if owner?(@conn, @project) do
-            .nav-item.dropdown
-              a.nav-link.btn.btn-outline-primary.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+            .dropdown
+              a.btn.btn-outline-primary.dropdown-toggle data-toggle="dropdown"
                 i.fas.fa-cog
-              .dropdown-menu.dropdown-menu-right aria-labelledby="navbarDropdown"
+              .dropdown-menu.dropdown-menu-right
                 = unless me?(@conn, user_project) do
                   a.dropdown-item href=Routes.project_people_path(@conn, :edit, @project, user_project) Change role...
                   .dropdown-divider
