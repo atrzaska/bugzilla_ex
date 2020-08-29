@@ -22,7 +22,7 @@ defmodule Bugzilla.Projects do
       join: u in UserProject, on: u.project_id == p.id,
       where: u.user_id == ^user.id,
       where: p.id == ^id
-    ) |> Repo.one
+    ) |> Repo.one!
   end
 
   def create_project(attrs \\ %{}) do
