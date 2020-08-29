@@ -7,9 +7,9 @@ defmodule Bugzilla.Repo.Migrations.StringEnums do
       remove :container
       remove :story_type
 
-      add :state, :string
-      add :container, :string
-      add :story_type, :string
+      add :state, :string, default: "unstarted", null: false
+      add :container, :string, default: "icebox", null: false
+      add :story_type, :string, default: "feature", null: false
     end
 
     create index(:stories, [:container])
