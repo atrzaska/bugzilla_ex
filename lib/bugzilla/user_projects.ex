@@ -26,6 +26,10 @@ defmodule Bugzilla.UserProjects do
     %UserProject{project_id: project.id, user_id: user.id, role: :owner} |> Repo.insert()
   end
 
+  def create_member(project: project, user: user) do
+    %UserProject{project_id: project.id, user_id: user.id, role: :member} |> Repo.insert()
+  end
+
   def update_user_project(%UserProject{} = user_project, attrs) do
     user_project
     |> UserProject.changeset(attrs)
