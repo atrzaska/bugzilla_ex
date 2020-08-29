@@ -65,7 +65,7 @@ defmodule Bugzilla.Stories do
   def get_story!(id), do: Repo.get!(Story, id)
 
   def create_story(attrs \\ %{}, user: user, project: project) do
-    %Story{creator_id: user.id, project_id: project.id, state: :unstarted}
+    %Story{creator_id: user.id, project_id: project.id}
     |> Story.changeset(attrs)
     |> Repo.insert()
   end
