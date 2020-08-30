@@ -2,6 +2,7 @@ defmodule Bugzilla.Projects do
   import Ecto.Query, warn: false
 
   alias Bugzilla.Repo
+  alias Bugzilla.Slug
   alias Bugzilla.Projects.Project
   alias Bugzilla.UserProjects.UserProject
 
@@ -17,16 +18,18 @@ defmodule Bugzilla.Projects do
     Repo.all(Project)
   end
 
-  def get_project!(id, user: user) do
+  def get_project!(slug, user: user) do
     from(p in Project,
       join: u in UserProject, on: u.project_id == p.id,
       where: u.user_id == ^user.id,
-      where: p.id == ^id
+      where: p.slug == ^slug
     ) |> Repo.one!
   end
 
   def create_project(attrs \\ %{}) do
-    %Project{}
+    slug = Slug.slug(attrs["name"])
+
+    %Project{slug: slug}
     |> Project.changeset(attrs)
     |> Repo.insert()
   end

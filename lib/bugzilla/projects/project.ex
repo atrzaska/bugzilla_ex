@@ -4,8 +4,10 @@ defmodule Bugzilla.Projects.Project do
 
   alias Bugzilla.Accounts.User
 
+  @derive {Phoenix.Param, key: :slug}
   schema "projects" do
     field :name, :string
+    field :slug, :string
 
     many_to_many :users, User, join_through: "user_projects"
 
