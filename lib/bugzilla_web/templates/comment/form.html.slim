@@ -1,7 +1,7 @@
 = form_for @changeset, @action, fn f ->
   = if @changeset.action do
     .alert.alert-danger
-      p Oops, something went wrong! Please check the errors below.
+      p.mb-0 Oops, something went wrong! Please check the errors below.
 
   .form-group.row
     = label f, :content, class: "col-sm-2 col-form-label"
