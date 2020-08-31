@@ -1,0 +1,7 @@
+<p>Hi <%= @invitation.user.name %>,</p>
+<p><%= @invitation.sender.name %> invited you to the Bugzilla project</p>
+<p><%= @invitation.project.name %></p>
+
+<%= render "_button.html", %{url: Routes.invitation_url(BugzillaWeb.Endpoint, :show, @invitation), text: "Join the project"} %>
+
+<p>Bugzilla is an award-winning, agile software project management app that brings focused collaboration to development teams.</p>

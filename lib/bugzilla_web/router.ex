@@ -72,6 +72,7 @@ defmodule BugzillaWeb.Router do
   scope "/", BugzillaWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    resources "/invitations", InvitationController, only: [:show]
     resources "/projects", ProjectController, except: [:show] do
       resources "/people", PeopleController, except: [:show]
 
