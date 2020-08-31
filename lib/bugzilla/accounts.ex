@@ -273,7 +273,7 @@ defmodule Bugzilla.Accounts do
     with {:ok, query} <- UserToken.verify_email_token_query(token, "confirm"),
          %User{} = user <- Repo.one(query),
          {:ok, %{user: user}} <- Repo.transaction(confirm_user_multi(user)),
-         {:ok, _email } = UserNotifier.deliver_welcome_email(user) do
+         {:ok, _email} <- UserNotifier.deliver_welcome_email(user) do
       {:ok, user}
     else
       _ -> :error

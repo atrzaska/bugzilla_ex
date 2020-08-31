@@ -16,6 +16,22 @@ defmodule Bugzilla.Email do
     |> premail()
   end
 
+  def reset_password_instructions(user, url) do
+    base_email(user)
+    |> assign(:url, url)
+    |> subject("Reset your Bugzilla password")
+    |> render("reset_password_instructions.html")
+    |> premail()
+  end
+
+  def update_email_instructions(user, url) do
+    base_email(user)
+    |> assign(:url, url)
+    |> subject("Update email instructions")
+    |> render("update_email_instructions.html")
+    |> premail()
+  end
+
   defp base_email(user) do
     new_email()
     |> to(user.email)

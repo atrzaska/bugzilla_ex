@@ -1,0 +1,7 @@
+<p>Hi <%= @user.name %>,</p>
+<p>You can change your e-mail by clicking the button below.</p>
+
+<%= render "_button.html", %{url: @url, text: "Confirm"} %>
+
+<p>If you didn't request this change, please ignore this.</p>
+
