@@ -7,6 +7,6 @@
     | We've sent confirmation instructions to your email address.&nbsp;
     strong If no email is received within ten minutes, check that the submitted address is correct.
   p.text-secondary
-    = link "Send code again", to: Routes.user_confirmation_path(@conn, :new)
+    = link "Resend confirmation", to: Routes.user_confirmation_path(@conn, :new)
     | &nbsp;or find more information in&nbsp;
-    a href="/" Help center
+    a href="/help" Help center
