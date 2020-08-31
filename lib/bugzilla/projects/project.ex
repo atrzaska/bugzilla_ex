@@ -21,5 +21,6 @@ defmodule Bugzilla.Projects.Project do
     |> validate_required([:name])
     |> validate_length(:name, max: 30)
     |> validate_format(:name, ~r/^[a-zA-Z0-9 ]*$/)
+    |> unique_constraint(:slug)
   end
 end
