@@ -3,7 +3,6 @@ defmodule BugzillaWeb.PeopleView do
   use BugzillaWeb, :view
 
   alias Bugzilla.UserProjects
-  alias Bugzilla.UserProjects.UserProject
 
   def owner?(conn, project) do
     UserProjects.owner?(user: conn.assigns.current_user, project: project)
