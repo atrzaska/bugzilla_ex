@@ -3,8 +3,28 @@ version: "3"
 services:
   postgres:
     image: postgres:12-alpine
+    container_name: postgres
     ports:
       - "5432:5432"
     environment:
       POSTGRES_DB: bugzilla_dev
       POSTGRES_PASSWORD: postgres
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+  mailcatcher:
+    image: tophfr/mailcatcher:latest
+    container_name: mailcatcher
+    ports:
+      - "1025:25"
+      - "1080:80"
+  rabbitmq:
+    image: rabbitmq:alpine
+    container_name: rabbitmq
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
