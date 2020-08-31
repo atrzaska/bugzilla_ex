@@ -4,4 +4,3 @@
 <%= render "_button.html", %{url: @url, text: "Confirm"} %>
 
 <p>If you didn't request this change, please ignore this.</p>
-
