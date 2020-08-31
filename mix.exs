@@ -50,7 +50,10 @@ defmodule Bugzilla.MixProject do
       {:phoenix_slime, "~> 0.13.1"},
       {:ecto_enum, "~> 1.4"},
       {:phoenix_active_link, "~> 0.2.1"},
-      {:navigation_history, "~> 0.3"}
+      {:navigation_history, "~> 0.3"},
+      {:bamboo, "~> 1.5"},
+      {:bamboo_smtp, "~> 2.1.0"},
+      {:premailex, "~> 0.3.10"}
     ]
   end
 
