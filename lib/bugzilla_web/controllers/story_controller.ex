@@ -8,8 +8,8 @@ defmodule BugzillaWeb.StoryController do
   def current(conn, %{"project_id" => project_id}) do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
-    IO.inspect(project_id)
     stories = Stories.list_current_stories(project: project)
+
     render(conn, "current.html", stories: stories, project: project)
   end
 
@@ -17,6 +17,7 @@ defmodule BugzillaWeb.StoryController do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
     stories = Stories.list_backlog_stories(project: project)
+
     render(conn, "backlog.html", stories: stories, project: project)
   end
 
@@ -24,6 +25,7 @@ defmodule BugzillaWeb.StoryController do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
     stories = Stories.list_icebox_stories(project: project)
+
     render(conn, "icebox.html", stories: stories, project: project)
   end
 
@@ -31,14 +33,15 @@ defmodule BugzillaWeb.StoryController do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
     stories = Stories.list_done_stories(project: project)
+
     render(conn, "done.html", stories: stories, project: project)
   end
 
   def new(conn, %{"project_id" => project_id}) do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
-
     changeset = Stories.change_story(%Story{creator_id: user.id, project: project.id})
+
     render(conn, "new.html", changeset: changeset, project: project)
   end
 
@@ -69,8 +72,8 @@ defmodule BugzillaWeb.StoryController do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
-
     changeset = Stories.change_story(story)
+
     render(conn, "edit.html", story: story, changeset: changeset, project: project)
   end
 
@@ -94,7 +97,6 @@ defmodule BugzillaWeb.StoryController do
     user = conn.assigns.current_user
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
-
     {:ok, _story} = Stories.delete_story(story)
 
     conn
