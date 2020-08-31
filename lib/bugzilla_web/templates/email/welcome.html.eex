@@ -1,0 +1,8 @@
+<p>Hi <%= @user.name %>,</p>
+<p>Welcome to our growing community of professionals who use our product to work faster and more effectively. We're happy you're here!</p>
+
+<%= render "_button.html", %{url: Routes.product_url(BugzillaWeb.Endpoint, :index), text: "Go to your dashboard"} %>
+
+<p>Have fun!</p>
+<p>Cheers,</p>
+<p>Andrzej, CEO, Bugzilla</p>

@@ -1,0 +1,6 @@
+<p>Thanks for signing up for Bugzilla!</p>
+<p>Please confirm your email (<%= @user.email %>) by clicking the button below.</p>
+
+<%= render "_button.html", %{url: @url, text: "Confirm"} %>
+
+<p>If you didn't create an account with us, please ignore this.</p>

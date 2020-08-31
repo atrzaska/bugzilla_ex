@@ -1,4 +1,6 @@
 defmodule Bugzilla.Accounts.UserNotifier do
+  alias Bugzilla.{Email, Mailer}
+
   # For simplicity, this module simply logs messages to the terminal.
   # You should replace it by a proper e-mail or notification tool, such as:
   #
@@ -11,10 +13,17 @@ defmodule Bugzilla.Accounts.UserNotifier do
     {:ok, %{to: to, body: body}}
   end
 
+  def deliver_welcome_email(user) do
+    email = Email.welcome(user) |> Mailer.deliver_later()
+    { :ok, email }
+  end
+
   @doc """
   Deliver instructions to confirm account.
   """
   def deliver_confirmation_instructions(user, url) do
+    Email.confirmation(user, url) |> Mailer.deliver_later()
+
     deliver(user.email, """
 
     ==============================

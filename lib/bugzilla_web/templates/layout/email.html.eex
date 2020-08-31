@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Bugzilla</title>
+    <%= render "_email_css.html" %>
+  </head>
+  <body class="">
+    <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td>&nbsp;</td>
+        <td class="container">
+          <div class="content">
+            <table role="presentation" class="main">
+              <tr>
+                <td class="wrapper">
+                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <a href="<%= Routes.product_url(BugzillaWeb.Endpoint, :index) %>">
+                          <img class="mb3" src="<%= Routes.static_url(BugzillaWeb.Endpoint, "/images/bootstrap.png") %>" width="48" height="48" />
+                        </a>
+                        <%= @inner_content %>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+            <div class="footer">
+              <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    <span>If you have any questions, feedback, ideas or problems don't hesitate to contact us!</span>
+                    <br>
+                    <span class="apple-link"><a href="<%= Routes.user_settings_url(BugzillaWeb.Endpoint, :edit) %>">Unsubscribe</a></span>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</html>
