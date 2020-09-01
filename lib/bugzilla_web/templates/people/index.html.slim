@@ -33,7 +33,11 @@ table.table
                 = unless me?(@conn, user_project) do
                   a.dropdown-item href=Routes.project_people_path(@conn, :edit, @project, user_project) Change role...
                   .dropdown-divider
-                = link "Remove from project...", to: Routes.project_people_path(@conn, :delete, @project, user_project), method: :delete, data: [confirm: "Are you sure?"], class: "dropdown-item"
+                = if me?(@conn, user_project) do
+                  = link "Leave project...", to: Routes.project_people_path(@conn, :delete, @project, user_project), method: :delete, data: [confirm: "Are you sure?"], class: "dropdown-item"
+                - else
+                  = link "Remove from project...", to: Routes.project_people_path(@conn, :delete, @project, user_project), method: :delete, data: [confirm: "Are you sure?"], class: "dropdown-item"
+
           - else
             = if me?(@conn, user_project) do
               = link "Leave", to: Routes.project_people_path(@conn, :delete, @project, user_project), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger"
