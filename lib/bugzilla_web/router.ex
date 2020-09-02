@@ -84,8 +84,8 @@ defmodule BugzillaWeb.Router do
       resources "/stories", StoryController
     end
 
-    resources "/tasks", TaskController
-    resources "/comments", CommentController
+    resources "/tasks", TaskController, except: [:index, :show]
+    resources "/comments", CommentController, except: [:index, :show]
 
     get "/dashboard", DashboardController, :index
     get "/users/settings", UserSettingsController, :edit
