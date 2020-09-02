@@ -1,0 +1,23 @@
+= form_for @changeset, @action, fn f ->
+  = if @changeset.action do
+    .alert.alert-danger
+      p.mb-0 Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :description, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = textarea f, :description, required: true, class: "form-control #{ invalid_field_class(f, :name) }", placeholder: "Description"
+      = error_tag f, :description
+
+  .form-group.row
+    = label f, :complete, class: "col-sm-2"
+    .col-sm-10
+      .form-check
+        = checkbox f, :complete, class: "form-check-input #{ invalid_field_class(f, :name) }"
+      = error_tag f, :complete
+
+  .form-group.row
+    .col-sm-2
+    .col-sm-10
+      = submit "Save", class: "btn btn-primary mr-2"
+      a.btn.btn-outline-secondary href=Routes.project_story_path(@conn, :edit, @conn.assigns.project, @conn.assigns.story) Back
