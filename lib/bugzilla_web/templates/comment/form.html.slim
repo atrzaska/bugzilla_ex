@@ -10,13 +10,7 @@
       = error_tag f, :content
 
   .form-group.row
-    = label f, :story_id, class: "col-sm-2 col-form-label"
-    .col-sm-10
-      = select f, :story_id, stories(@conn), required: true, class: "form-control #{ invalid_field_class(f, :container) }"
-      = error_tag f, :story_id
-
-  .form-group.row
     .col-sm-2
     .col-sm-10
       = submit "Save", class: "btn btn-primary mr-2"
-      a.btn.btn-primary.btn-outline-secondary href=Routes.comment_path(@conn, :index) Back
+      a.btn.btn-outline-secondary href=Routes.project_story_path(@conn, :edit, @conn.assigns.project, @conn.assigns.story) Back
