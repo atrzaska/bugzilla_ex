@@ -5,7 +5,7 @@
 = render_shared "_project_tabs.html", assigns
 
 = if @stories |> Enum.empty? do
-  h1.text-center.text-secondary.p-4 Nothing yet here
+  h1.text-center.text-secondary.p-4 You don't have any stories yet
   .text-center
     a.btn.btn-primary href=Routes.project_story_path(@conn, :new, @project) Create story
 - else
