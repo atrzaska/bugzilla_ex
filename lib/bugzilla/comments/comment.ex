@@ -18,7 +18,7 @@ defmodule Bugzilla.Comments.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:content, :story_id])
+    |> cast(attrs, [:content])
     |> validate_required([:content, :story_id])
     |> prepare_changes(fn (changeset) ->
       if story_id = get_change(changeset, :story_id) do
