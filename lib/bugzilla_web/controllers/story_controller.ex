@@ -2,6 +2,8 @@ defmodule BugzillaWeb.StoryController do
   use BugzillaWeb, :controller
 
   alias Bugzilla.Stories
+  alias Bugzilla.Comments
+  alias Bugzilla.Tasks
   alias Bugzilla.Projects
   alias Bugzilla.Stories.Story
 
@@ -73,8 +75,12 @@ defmodule BugzillaWeb.StoryController do
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
     changeset = Stories.change_story(story)
+    comments = Comments.list_comments(story: story)
+    tasks = Tasks.list_tasks(story: story)
 
-    render(conn, "edit.html", story: story, changeset: changeset, project: project)
+    conn
+    |> put_session(:current_story_id, story.id)
+    |> render("edit.html", story: story, changeset: changeset, project: project, comments: comments, tasks: tasks)
   end
 
   def update(conn, %{"project_id" => project_id, "id" => id, "story" => story_params}) do

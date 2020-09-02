@@ -1,3 +1,31 @@
 h1.mb-4 Edit Story
 
 = render "form.html", Map.put(assigns, :action, Routes.project_story_path(@conn, :update, @project, @story))
+
+hr
+
+h1 Comments
+
+.list-group.border-top-0.mb-3
+  = for comment <- @comments do
+    .list-group-item.d-flex
+      a.mr-auto href=Routes.comment_path(@conn, :edit, comment)
+        = comment.content
+      = link to: Routes.comment_path(@conn, :delete, comment), method: :delete, data: [confirm: "Are you sure?"] do
+        i.far.fa-times-circle
+
+a.mb-3 href=Routes.comment_path(@conn, :new) New Comment
+
+hr
+
+h1 Tasks
+
+.list-group.border-top-0.mb-3
+  = for task <- @tasks do
+    .list-group-item.d-flex
+      a.mr-auto href=Routes.task_path(@conn, :edit, task)
+        = task.description
+      = link to: Routes.task_path(@conn, :delete, task), method: :delete, data: [confirm: "Are you sure?"] do
+        i.far.fa-times-circle
+
+a href=Routes.task_path(@conn, :new) New Task
