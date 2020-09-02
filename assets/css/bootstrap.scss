@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+// Your variable overrides
+$body-bg: #FFFFFF;
+$body-color: #141A26;
+$primary: #563D7C;
+
+//$border-radius: 3px;
+$enable-shadows: true;
+
+// Bootstrap and its default variables
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// Extra styles
+.card {
+  box-shadow: 0 2px 2px rgba(0,0,0,.16);
+  padding: 1.5rem;
+}
+
+.btn-outline-gray {
+  border-color: #e5e5e5;
+}
+
+.btn-outline-gray:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+}
+
+.toast {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  z-index: 2;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+}

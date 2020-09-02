@@ -1,8 +1,9 @@
+@import "./bootstrap";
 @import "./utils";
 @import "./sidebar";
 @import "./header";
-@import "./bootstrap_custom";
 @import "./product";
+@import "./auth";
 
 .wrapper {
   margin-left: 50px;
