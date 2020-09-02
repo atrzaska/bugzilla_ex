@@ -3,6 +3,7 @@ defmodule Bugzilla.Projects do
 
   alias Bugzilla.Repo
   alias Bugzilla.Slug
+  alias Bugzilla.Uid
   alias Bugzilla.Projects.Project
   alias Bugzilla.UserProjects.UserProject
 
@@ -18,6 +19,10 @@ defmodule Bugzilla.Projects do
     Repo.all(Project)
   end
 
+  def slug_taken?(slug) do
+    from(p in Project, where: p.slug == ^slug) |> Repo.exists?
+  end
+
   def get_project!(slug, user: user) do
     from(p in Project,
       join: u in UserProject, on: u.project_id == p.id,
@@ -28,6 +33,7 @@ defmodule Bugzilla.Projects do
 
   def create_project(attrs \\ %{}) do
     slug = Slug.slug(attrs["name"])
+    slug = if slug_taken?(slug), do: "#{slug}-#{Uid.uid}", else: slug
 
     %Project{slug: slug}
     |> Project.changeset(attrs)
