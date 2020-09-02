@@ -4,6 +4,7 @@ defmodule Bugzilla.Stories do
 
   alias Bugzilla.Stories.Story
   alias Bugzilla.Projects.Project
+  alias Bugzilla.UserProjects.UserProject
 
   def list_current_stories(project: project) do
     from(s in Story,
@@ -56,6 +57,10 @@ defmodule Bugzilla.Stories do
 
   def get_story!(id, user: user) do
     Story |> Repo.get_by!(creator_id: user.id, id: id)
+  end
+
+  def get_story_and_project!(id, user: user) do
+    Story |> Repo.get_by!(creator_id: user.id, id: id) |> Repo.preload(:project)
   end
 
   def get_story!(id, project: project) do
