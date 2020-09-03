@@ -8,10 +8,6 @@ defmodule Bugzilla.UserProjects do
     from(p in UserProject, where: p.project_id == ^project.id, preload: [:user]) |> Repo.all
   end
 
-  def list_user_projects do
-    Repo.all(UserProject)
-  end
-
   def get_user_project!(id, project: project) do
     UserProject |> Repo.get_by!(project_id: project.id, id: id) |> Repo.preload(:user)
   end
