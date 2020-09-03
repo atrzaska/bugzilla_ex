@@ -32,11 +32,11 @@ defmodule Bugzilla.Email do
     |> premail()
   end
 
-  def invitation(invitation) do
-    base_email(invitation.user)
-    |> assign(:invitation, invitation)
+  def invite(invite) do
+    base_email(%{email: invite.email})
+    |> assign(:invite, invite)
     |> subject("You have been invited")
-    |> render("invitation.html")
+    |> render("invite.html")
     |> premail()
   end
 
