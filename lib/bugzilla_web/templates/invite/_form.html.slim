@@ -1,0 +1,16 @@
+= form_for @changeset, @action, fn f ->
+  = if @changeset.action do
+    .alert.alert-danger
+      p.mb-0 Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :email, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = text_input f, :email, required: true, class: "form-control #{ invalid_field_class(f, :name) }"
+      = error_tag f, :email
+
+  .form-group.row
+    .col-sm-2
+    .col-sm-10
+      = submit "Invite", class: "btn btn-primary mr-2"
+      a.btn.btn-outline-secondary href=Routes.project_people_path(@conn, :index, @project) Back
