@@ -18,12 +18,20 @@ defmodule Bugzilla.UserProjects do
     |> Repo.insert()
   end
 
+  def exist?(project: project, user: user) do
+    from(u in UserProject, where: u.project_id == ^project.id and u.user_id == ^user.id) |> Repo.exists?
+  end
+
   def create_owner(project: project, user: user) do
-    %UserProject{project_id: project.id, user_id: user.id, role: :owner} |> Repo.insert()
+    unless exist?(project: project, user: user) do
+      %UserProject{project_id: project.id, user_id: user.id, role: :owner} |> Repo.insert()
+    end
   end
 
   def create_member(project: project, user: user) do
-    %UserProject{project_id: project.id, user_id: user.id, role: :member} |> Repo.insert()
+    unless exist?(project: project, user: user) do
+      %UserProject{project_id: project.id, user_id: user.id, role: :member} |> Repo.insert()
+    end
   end
 
   def update_user_project(%UserProject{} = user_project, attrs) do
