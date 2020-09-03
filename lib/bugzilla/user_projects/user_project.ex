@@ -21,7 +21,7 @@ defmodule Bugzilla.UserProjects.UserProject do
   @doc false
   def changeset(user_project, attrs) do
     user_project
-    |> cast(attrs, [:role, :user_id])
-    |> validate_required([:role, :user_id])
+    |> cast(attrs, [:role])
+    |> validate_required([:role, :user_id, :project_id])
   end
 end
