@@ -23,6 +23,14 @@ defmodule Bugzilla.Projects do
     from(p in Project, where: p.slug == ^slug) |> Repo.exists?
   end
 
+  def get_project!(id, user: user) when is_number(id) do
+    from(p in Project,
+      join: u in UserProject, on: u.project_id == p.id,
+      where: u.user_id == ^user.id,
+      where: p.id == ^id
+    ) |> Repo.one!
+  end
+
   def get_project!(slug, user: user) do
     from(p in Project,
       join: u in UserProject, on: u.project_id == p.id,
