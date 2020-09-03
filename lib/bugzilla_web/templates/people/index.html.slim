@@ -1,7 +1,7 @@
 .d-flex.justify-content-between.align-items-center.mb-4
   h1 = @project.name
   = if owner?(@conn, @project) do
-    a.btn.btn-primary href=Routes.project_people_path(@conn, :new, @project) Invite member
+    a.btn.btn-primary href=Routes.invite_path(@conn, :new) Invite member
 
 = render_shared "_project_tabs.html", assigns
 
