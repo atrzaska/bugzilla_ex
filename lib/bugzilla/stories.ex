@@ -59,12 +59,12 @@ defmodule Bugzilla.Stories do
     Story |> Repo.get_by!(creator_id: user.id, id: id)
   end
 
-  def get_story_and_project!(id, user: user) do
-    Story |> Repo.get_by!(creator_id: user.id, id: id) |> Repo.preload(:project)
-  end
-
   def get_story!(id, project: project) do
     Story |> Repo.get_by!(project_id: project.id, id: id)
+  end
+
+  def get_story_and_project!(id, user: user) do
+    Story |> Repo.get_by!(creator_id: user.id, id: id) |> Repo.preload(:project)
   end
 
   def get_story!(id), do: Repo.get!(Story, id)
