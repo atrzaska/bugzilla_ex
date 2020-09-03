@@ -3,7 +3,7 @@ defmodule Bugzilla.Tasks.Task do
   import Ecto.Changeset
 
   alias Bugzilla.Stories.Story
-  alias Bugzilla.Stories.User
+  alias Bugzilla.Accounts.User
 
   schema "tasks" do
     field :description, :string
