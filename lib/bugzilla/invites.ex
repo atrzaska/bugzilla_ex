@@ -28,4 +28,8 @@ defmodule Bugzilla.Invites do
     |> Invite.changeset(attrs)
     |> Repo.update()
   end
+
+  def change_invite(%Invite{} = invite, attrs \\ %{}) do
+    Invite.changeset(invite, attrs)
+  end
 end
