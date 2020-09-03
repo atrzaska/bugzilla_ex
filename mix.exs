@@ -53,7 +53,8 @@ defmodule Bugzilla.MixProject do
       {:navigation_history, "~> 0.3"},
       {:bamboo, "~> 1.5"},
       {:bamboo_smtp, "~> 2.1.0"},
-      {:premailex, "~> 0.3.10"}
+      {:premailex, "~> 0.3.10"},
+      {:timex, "~> 3.6"}
     ]
   end
 
