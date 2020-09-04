@@ -67,6 +67,12 @@ defmodule Bugzilla.Accounts.User do
     |> delete_change(:password)
   end
 
+  def personal_data_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name, :receive_news_and_updates])
+    |> validate_required([:name])
+  end
+
   @doc """
   A user changeset for changing the e-mail.
 

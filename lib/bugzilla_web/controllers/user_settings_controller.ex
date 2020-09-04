@@ -63,6 +63,20 @@ defmodule BugzillaWeb.UserSettingsController do
     end
   end
 
+  def update(conn, %{"user" => user_params}) do
+    user = conn.assigns.current_user
+
+    case Accounts.update_user(user, user_params) do
+      {:ok, user} ->
+        conn
+        |> put_flash(:info, "Updated successfully.")
+        |> redirect(to: Routes.user_settings_path(conn, :edit))
+
+      {:error, changeset} ->
+        render(conn, "edit.html", personal_changeset: changeset)
+    end
+  end
+
   def delete(conn, _params) do
     user = conn.assigns.current_user
 
@@ -78,6 +92,7 @@ defmodule BugzillaWeb.UserSettingsController do
     user = conn.assigns.current_user
 
     conn
+    |> assign(:personal_changeset, Accounts.change_personal_data(user))
     |> assign(:email_changeset, Accounts.change_user_email(user))
     |> assign(:password_changeset, Accounts.change_user_password(user))
   end

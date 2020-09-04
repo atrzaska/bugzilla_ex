@@ -1,4 +1,30 @@
 h1.text-center Settings
+h3.mb-4 Change personal data
+
+= form_for @personal_changeset, Routes.user_settings_path(@conn, :update), fn f ->
+  = if @personal_changeset.action do
+    .alert.alert-danger
+      p.mb-0 Oops, something went wrong! Please check the errors below.
+
+  .form-group.row
+    = label f, :name, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = text_input f, :name, required: true, class: "form-control #{ invalid_field_class(f, :name) }", placeholder: "Name"
+      = error_tag f, :name
+
+  .form-group.row
+    = label f, :receive_news_and_updates, class: "col-sm-2"
+    .col-sm-10
+      .form-check
+        = checkbox f, :receive_news_and_updates, class: "form-check-input #{ invalid_field_class(f, :receive_news_and_updates) }"
+      = error_tag f, :receive_news_and_updates
+
+  .form-group.row
+    .col-sm-2
+    .col-sm-10
+      = submit "Save", class: "btn btn-primary"
+
+hr.my-4
 h3.mb-4 Change email
 
 = form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f ->

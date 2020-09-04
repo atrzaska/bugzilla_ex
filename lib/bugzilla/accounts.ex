@@ -351,4 +351,14 @@ defmodule Bugzilla.Accounts do
   def delete_user(%User{} = user) do
     Repo.delete(user)
   end
+
+  def change_personal_data(user, attrs \\ %{}) do
+    User.personal_data_changeset(user, attrs)
+  end
+
+  def update_user(%User{} = user, attrs) do
+    user
+    |> User.personal_data_changeset(attrs)
+    |> Repo.update()
+  end
 end
