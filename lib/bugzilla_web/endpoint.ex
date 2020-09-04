@@ -1,5 +1,5 @@
 defmodule BugzillaWeb.Endpoint do
-  plug Sentry.PlugCaputure
+  use Sentry.PlugCapture
   use Phoenix.Endpoint, otp_app: :bugzilla
 
   # The session will be stored in the cookie and signed,
