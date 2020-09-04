@@ -1,0 +1,3 @@
+<p>Hi <%= @user.name %>,</p>
+<p>This is a confirmation that your account on Bugzilla have been canceled.</p>
+<p>Bugzilla Team</p>

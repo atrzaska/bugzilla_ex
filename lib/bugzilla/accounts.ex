@@ -347,4 +347,8 @@ defmodule Bugzilla.Accounts do
       {:error, :user, changeset, _} -> {:error, changeset}
     end
   end
+
+  def delete_user(%User{} = user) do
+    Repo.delete(user)
+  end
 end

@@ -40,6 +40,13 @@ defmodule Bugzilla.Email do
     |> premail()
   end
 
+  def delete_account_confirmation(user) do
+    base_email(user)
+    |> subject("We're sorry to see you go")
+    |> render("delete_account_confirmation.html")
+    |> premail()
+  end
+
   defp base_email(user) do
     new_email()
     |> to(user.email)

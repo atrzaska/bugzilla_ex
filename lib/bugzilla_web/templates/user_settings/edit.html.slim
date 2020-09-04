@@ -1,5 +1,5 @@
 h1.text-center Settings
-h3.mb-4 Change e-mail
+h3.mb-4 Change email
 
 = form_for @email_changeset, Routes.user_settings_path(@conn, :update_email), fn f ->
   = if @email_changeset.action do
@@ -21,7 +21,7 @@ h3.mb-4 Change e-mail
   .form-group.row
     .col-sm-2
     .col-sm-10
-      = submit "Change e-mail", class: "btn btn-primary"
+      = submit "Change email", class: "btn btn-primary"
 
 hr.my-4
 h3.mb-4 Change password
@@ -53,3 +53,11 @@ h3.mb-4 Change password
     .col-sm-2
     .col-sm-10
       = submit "Change password", class: "btn btn-primary"
+
+hr.my-4
+h3.mb-4 Cancel my account
+
+p Unhappy?
+
+div
+  = link "Cancel my account", to: Routes.user_settings_path(@conn, :delete), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger"

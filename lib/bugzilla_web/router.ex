@@ -91,6 +91,7 @@ defmodule BugzillaWeb.Router do
 
     get "/dashboard", DashboardController, :index
     get "/users/settings", UserSettingsController, :edit
+    delete "/users/settings", UserSettingsController, :delete
     put "/users/settings/update_password", UserSettingsController, :update_password
     put "/users/settings/update_email", UserSettingsController, :update_email
     get "/users/settings/confirm_email/:token", UserSettingsController, :confirm_email

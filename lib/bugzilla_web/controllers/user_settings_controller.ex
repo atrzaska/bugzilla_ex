@@ -3,6 +3,7 @@ defmodule BugzillaWeb.UserSettingsController do
 
   alias Bugzilla.Accounts
   alias BugzillaWeb.UserAuth
+  alias Bugzilla.Mailer
 
   plug :assign_email_and_password_changesets
 
@@ -60,6 +61,17 @@ defmodule BugzillaWeb.UserSettingsController do
       {:error, changeset} ->
         render(conn, "edit.html", password_changeset: changeset)
     end
+  end
+
+  def delete(conn, _params) do
+    user = conn.assigns.current_user
+
+    Accounts.delete_user(user)
+    Mailer.deliver_delete_account_confirmation(user)
+
+    conn
+    |> put_flash(:info, "Your account have been deleted.")
+    |> UserAuth.log_out_user()
   end
 
   defp assign_email_and_password_changesets(conn, _opts) do

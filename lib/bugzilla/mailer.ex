@@ -22,4 +22,8 @@ defmodule Bugzilla.Mailer do
   def deliver_invitation_email(invite) do
     {:ok, Email.invite(invite) |> deliver_later()}
   end
+
+  def deliver_delete_account_confirmation(user) do
+    {:ok, Email.delete_account_confirmation(user) |> deliver_later()}
+  end
 end
