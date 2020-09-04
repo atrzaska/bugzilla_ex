@@ -8,11 +8,11 @@
     .col-sm-10
       .d-flex.flex-column
         label.form-check-label.mb-3
-          = radio_button f, :role, :member, required: true, class: "form-check form-check-inline #{ invalid_field_class(f, :name) }"
+          = radio_button f, :role, :member, required: true, class: "form-check form-check-inline #{ invalid_field_class(f, :role) }"
           b Member
           .text-secondary Has full administrative access to the entire project.
         label.form-check-label
-          = radio_button f, :role, :owner, required: true, class: "form-check form-check-inline #{ invalid_field_class(f, :name) }"
+          = radio_button f, :role, :owner, required: true, class: "form-check form-check-inline #{ invalid_field_class(f, :role) }"
           b Owner
           .text-secondary Can see every member and create new stories.
       = error_tag f, :role

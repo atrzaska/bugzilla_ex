@@ -6,14 +6,14 @@
   .form-group.row
     = label f, :description, class: "col-sm-2 col-form-label"
     .col-sm-10
-      = textarea f, :description, required: true, class: "form-control #{ invalid_field_class(f, :name) }", placeholder: "Description"
+      = textarea f, :description, required: true, class: "form-control #{ invalid_field_class(f, :description) }", placeholder: "Description"
       = error_tag f, :description
 
   .form-group.row
     = label f, :complete, class: "col-sm-2"
     .col-sm-10
       .form-check
-        = checkbox f, :complete, class: "form-check-input #{ invalid_field_class(f, :name) }"
+        = checkbox f, :complete, class: "form-check-input #{ invalid_field_class(f, :complete) }"
       = error_tag f, :complete
 
   .form-group.row

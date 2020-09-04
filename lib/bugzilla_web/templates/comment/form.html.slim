@@ -6,7 +6,7 @@
   .form-group.row
     = label f, :content, class: "col-sm-2 col-form-label"
     .col-sm-10
-      = textarea f, :content, required: true, class: "form-control #{ invalid_field_class(f, :name) }", placeholder: "Content"
+      = textarea f, :content, required: true, class: "form-control #{ invalid_field_class(f, :content) }", placeholder: "Content"
       = error_tag f, :content
 
   .form-group.row
