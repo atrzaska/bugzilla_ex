@@ -67,7 +67,7 @@ defmodule BugzillaWeb.UserSettingsController do
     user = conn.assigns.user
 
     case Accounts.update_user(user, user_params) do
-      {:ok, user} ->
+      {:ok, _user} ->
         conn
         |> put_flash(:info, "Updated successfully.")
         |> redirect(to: Routes.user_settings_path(conn, :edit))
