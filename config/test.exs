@@ -9,10 +9,7 @@ config :bcrypt_elixir, :log_rounds, 1
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
 config :bugzilla, Bugzilla.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "bugzilla_test#{System.get_env("MIX_TEST_PARTITION")}",
-  hostname: "localhost",
+  url: System.get_env("DATABASE_URL"),
   pool: Ecto.Adapters.SQL.Sandbox
 
 # We don't run a server during test. If one is required,
