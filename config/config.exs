@@ -13,7 +13,7 @@ config :bugzilla,
 # Configures the endpoint
 config :bugzilla, BugzillaWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "1d7IuoR1IkJirBDSbnLqV5hrAZ7eHB7AjO2KY3nN88YxXHiZj2YXeXkRhE+TgaQg",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: BugzillaWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Bugzilla.PubSub,
   live_view: [signing_salt: "xiLNYf8/"]
