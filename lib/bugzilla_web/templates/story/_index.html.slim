@@ -43,9 +43,9 @@
                   = link "Accept", to: Routes.project_story_path(@conn, :update, @project, story, story: [state: :accepted]), method: :put, class: "btn btn-outline-primary d-flex align-items-center border-right-0"
                   = link "Reject", to: Routes.project_story_path(@conn, :update, @project, story, story: [state: :rejected]), method: :put, class: "btn btn-outline-primary d-flex align-items-center border-right-0"
                 - :rejected ->
-                  = link "Mark as unstarted", to: Routes.project_story_path(@conn, :update, @project, story, story: [state: :unstarted]), method: :put, class: "btn btn-outline-primary d-flex align-items-center border-right-0"
+                  = link "Restart", to: Routes.project_story_path(@conn, :update, @project, story, story: [state: :unstarted]), method: :put, class: "btn btn-outline-primary d-flex align-items-center border-right-0"
                 - _ ->
-                  = link "Mark as unstarted", to: Routes.project_story_path(@conn, :update, @project, story, story: [state: :unstarted]), method: :put, class: "btn btn-outline-primary d-flex align-items-center border-right-0"
+                  = link "Restart", to: Routes.project_story_path(@conn, :update, @project, story, story: [state: :unstarted]), method: :put, class: "btn btn-outline-primary d-flex align-items-center border-right-0"
               a.btn.btn-outline-primary.dropdown-toggle.dropdown-toggle-split.border-left-0 data-toggle="dropdown"
               .dropdown-menu.dropdown-menu-right
                 a.dropdown-item href=Routes.project_story_path(@conn, :edit, @project, story) Edit
