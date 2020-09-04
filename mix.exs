@@ -54,7 +54,8 @@ defmodule Bugzilla.MixProject do
       {:bamboo, "~> 1.5"},
       {:bamboo_smtp, "~> 2.1.0"},
       {:premailex, "~> 0.3.10"},
-      {:timex, "~> 3.6"}
+      {:timex, "~> 3.6"},
+      {:sentry, "~> 8.0"}
     ]
   end
 

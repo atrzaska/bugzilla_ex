@@ -19,6 +19,16 @@ config :bugzilla, BugzillaWeb.Endpoint,
   live_view: [signing_salt: "xiLNYf8/"]
 
 # Configures Elixir's Logger
+config :logger,
+  backends: [:console, Sentry.LoggerBackend]
+
+config :sentry,
+  dsn: System.get_env("SENTRY_DSN"),
+  environment_name: Mix.env(),
+  included_environments: [:prod],
+  enable_source_code_context: true,
+  root_source_code_path: File.cwd!()
+
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
