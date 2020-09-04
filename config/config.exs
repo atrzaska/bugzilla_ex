@@ -16,7 +16,7 @@ config :bugzilla, BugzillaWeb.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: BugzillaWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Bugzilla.PubSub,
-  live_view: [signing_salt: "xiLNYf8/"]
+  live_view: [signing_salt: System.get_env("SECRET_SALT")]
 
 # Configures Elixir's Logger
 config :logger,
