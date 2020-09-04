@@ -8,7 +8,7 @@ defmodule BugzillaWeb.StoryController do
   alias Bugzilla.Stories.Story
 
   def current(conn, %{"project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     stories = Stories.list_current_stories(project: project)
 
@@ -16,7 +16,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def backlog(conn, %{"project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     stories = Stories.list_backlog_stories(project: project)
 
@@ -24,7 +24,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def icebox(conn, %{"project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     stories = Stories.list_icebox_stories(project: project)
 
@@ -32,7 +32,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def done(conn, %{"project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     stories = Stories.list_done_stories(project: project)
 
@@ -40,7 +40,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def new(conn, %{"project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     changeset = Stories.change_story(%Story{creator_id: user.id, project: project.id})
 
@@ -48,7 +48,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def create(conn, %{"project_id" => project_id, "story" => story_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
 
     case Stories.create_story(story_params, user: user, project: project) do
@@ -63,7 +63,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def show(conn, %{"project_id" => project_id, "id" => id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
 
@@ -71,7 +71,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def edit(conn, %{"project_id" => project_id, "id" => id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
     changeset = Stories.change_story(story)
@@ -80,11 +80,17 @@ defmodule BugzillaWeb.StoryController do
 
     conn
     |> put_session(:current_story_id, story.id)
-    |> render("edit.html", story: story, changeset: changeset, project: project, comments: comments, tasks: tasks)
+    |> render("edit.html",
+      story: story,
+      changeset: changeset,
+      project: project,
+      comments: comments,
+      tasks: tasks
+    )
   end
 
   def update(conn, %{"project_id" => project_id, "id" => id, "story" => story_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
 
@@ -100,7 +106,7 @@ defmodule BugzillaWeb.StoryController do
   end
 
   def delete(conn, %{"project_id" => project_id, "id" => id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     story = Stories.get_story!(id, project: project)
     {:ok, _story} = Stories.delete_story(story)

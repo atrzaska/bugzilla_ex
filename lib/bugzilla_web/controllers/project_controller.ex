@@ -6,7 +6,7 @@ defmodule BugzillaWeb.ProjectController do
   alias Bugzilla.UserProjects
 
   def index(conn, _params) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     projects = Projects.list_projects(user: user)
 
     render(conn, "index.html", projects: projects)
@@ -18,7 +18,7 @@ defmodule BugzillaWeb.ProjectController do
   end
 
   def create(conn, %{"project" => project_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
 
     case Projects.create_project(project_params) do
       {:ok, project} ->
@@ -34,7 +34,7 @@ defmodule BugzillaWeb.ProjectController do
   end
 
   def edit(conn, %{"id" => id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(id, user: user)
     changeset = Projects.change_project(project)
 
@@ -42,7 +42,7 @@ defmodule BugzillaWeb.ProjectController do
   end
 
   def update(conn, %{"id" => id, "project" => project_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(id, user: user)
 
     case Projects.update_project(project, project_params) do
@@ -57,7 +57,7 @@ defmodule BugzillaWeb.ProjectController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(id, user: user)
 
     {:ok, _project} = Projects.delete_project(project)

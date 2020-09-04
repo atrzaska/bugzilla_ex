@@ -5,7 +5,7 @@ defmodule BugzillaWeb.PeopleController do
   alias Bugzilla.Projects
 
   def index(conn, %{"project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     user_projects = UserProjects.list_user_projects(project: project)
 
@@ -15,7 +15,7 @@ defmodule BugzillaWeb.PeopleController do
   end
 
   def edit(conn, %{"id" => id, "project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     user_project = UserProjects.get_user_project!(id, project: project)
     changeset = UserProjects.change_user_project(user_project)
@@ -24,8 +24,12 @@ defmodule BugzillaWeb.PeopleController do
   end
 
   # only allow owners to change role
-  def update(conn, %{"id" => id, "project_id" => project_id, "user_project" => user_project_params}) do
-    user = conn.assigns.current_user
+  def update(conn, %{
+        "id" => id,
+        "project_id" => project_id,
+        "user_project" => user_project_params
+      }) do
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     user_project = UserProjects.get_user_project!(id, project: project)
 
@@ -41,7 +45,7 @@ defmodule BugzillaWeb.PeopleController do
   end
 
   def delete(conn, %{"id" => id, "project_id" => project_id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     project = Projects.get_project!(project_id, user: user)
     user_project = UserProjects.get_user_project!(id, project: project)
     {:ok, _user_project} = UserProjects.delete_user_project(user_project)

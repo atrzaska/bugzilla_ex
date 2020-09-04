@@ -87,7 +87,7 @@ defmodule BugzillaWeb.UserAuthTest do
     test "authenticates user from session", %{conn: conn, user: user} do
       user_token = Accounts.generate_user_session_token(user)
       conn = conn |> put_session(:user_token, user_token) |> UserAuth.fetch_current_user([])
-      assert conn.assigns.current_user.id == user.id
+      assert conn.assigns.user.id == user.id
     end
 
     test "authenticates user from cookies", %{conn: conn, user: user} do
@@ -103,14 +103,14 @@ defmodule BugzillaWeb.UserAuthTest do
         |> UserAuth.fetch_current_user([])
 
       assert get_session(conn, :user_token) == user_token
-      assert conn.assigns.current_user.id == user.id
+      assert conn.assigns.user.id == user.id
     end
 
     test "does not authenticate if data is missing", %{conn: conn, user: user} do
       _ = Accounts.generate_user_session_token(user)
       conn = UserAuth.fetch_current_user(conn, [])
       refute get_session(conn, :user_token)
-      refute conn.assigns.current_user
+      refute conn.assigns.user
     end
   end
 

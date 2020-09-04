@@ -17,6 +17,6 @@ defmodule BugzillaWeb.StoryView do
   end
 
   def owner?(conn, %Comment{} = comment) do
-    comment.user_id == conn.assigns.current_user.id
+    comment.user_id == conn.assigns.user.id
   end
 end

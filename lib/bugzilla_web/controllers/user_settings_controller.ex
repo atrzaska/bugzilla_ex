@@ -12,7 +12,7 @@ defmodule BugzillaWeb.UserSettingsController do
   end
 
   def update_email(conn, %{"current_password" => password, "user" => user_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
 
     case Accounts.apply_user_email(user, password, user_params) do
       {:ok, applied_user} ->
@@ -35,7 +35,7 @@ defmodule BugzillaWeb.UserSettingsController do
   end
 
   def confirm_email(conn, %{"token" => token}) do
-    case Accounts.update_user_email(conn.assigns.current_user, token) do
+    case Accounts.update_user_email(conn.assigns.user, token) do
       :ok ->
         conn
         |> put_flash(:info, "E-mail changed successfully.")
@@ -49,7 +49,7 @@ defmodule BugzillaWeb.UserSettingsController do
   end
 
   def update_password(conn, %{"current_password" => password, "user" => user_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
 
     case Accounts.update_user_password(user, password, user_params) do
       {:ok, user} ->
@@ -64,7 +64,7 @@ defmodule BugzillaWeb.UserSettingsController do
   end
 
   def update(conn, %{"user" => user_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
 
     case Accounts.update_user(user, user_params) do
       {:ok, user} ->
@@ -78,7 +78,7 @@ defmodule BugzillaWeb.UserSettingsController do
   end
 
   def delete(conn, _params) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
 
     Accounts.delete_user(user)
     Mailer.deliver_delete_account_confirmation(user)
@@ -89,7 +89,7 @@ defmodule BugzillaWeb.UserSettingsController do
   end
 
   defp assign_email_and_password_changesets(conn, _opts) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
 
     conn
     |> assign(:personal_changeset, Accounts.change_personal_data(user))

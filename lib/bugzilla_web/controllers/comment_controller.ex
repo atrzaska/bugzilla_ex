@@ -6,7 +6,7 @@ defmodule BugzillaWeb.CommentController do
   alias Bugzilla.Stories
 
   def new(conn, _params) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     story_id = conn |> get_session(:current_story_id)
     story = Stories.get_story_and_project!(story_id, user: user)
     project = story.project
@@ -19,7 +19,7 @@ defmodule BugzillaWeb.CommentController do
   end
 
   def create(conn, %{"comment" => comment_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     story_id = conn |> get_session(:current_story_id)
     story = Stories.get_story_and_project!(story_id, user: user)
     project = story.project
@@ -36,7 +36,7 @@ defmodule BugzillaWeb.CommentController do
   end
 
   def edit(conn, %{"id" => id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     story_id = conn |> get_session(:current_story_id)
     story = Stories.get_story_and_project!(story_id, user: user)
     project = story.project
@@ -50,7 +50,7 @@ defmodule BugzillaWeb.CommentController do
   end
 
   def update(conn, %{"id" => id, "comment" => comment_params}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     comment = Comments.get_comment!(id, user: user)
     story_id = conn |> get_session(:current_story_id)
     story = Stories.get_story_and_project!(story_id, user: user)
@@ -68,7 +68,7 @@ defmodule BugzillaWeb.CommentController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = conn.assigns.current_user
+    user = conn.assigns.user
     comment = Comments.get_comment!(id, user: user)
     story_id = conn |> get_session(:current_story_id)
     story = Stories.get_story_and_project!(story_id, user: user)

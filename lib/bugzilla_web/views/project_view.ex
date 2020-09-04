@@ -5,6 +5,6 @@ defmodule BugzillaWeb.ProjectView do
   alias Bugzilla.UserProjects
 
   def owner?(conn, project) do
-    UserProjects.owner?(user: conn.assigns.current_user, project: project)
+    UserProjects.owner?(user: conn.assigns.user, project: project)
   end
 end
