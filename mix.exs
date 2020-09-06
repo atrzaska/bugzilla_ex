@@ -41,8 +41,8 @@ defmodule Bugzilla.MixProject do
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:phoenix_live_dashboard, "~> 0.2"},
-      {:telemetry_metrics, "~> 0.4"},
-      {:telemetry_poller, "~> 0.4"},
+      {:telemetry_metrics, "~> 0.5"},
+      {:telemetry_poller, "~> 0.5"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
@@ -55,7 +55,12 @@ defmodule Bugzilla.MixProject do
       {:bamboo_smtp, "~> 2.1.0"},
       {:premailex, "~> 0.3.10"},
       {:timex, "~> 3.6"},
-      {:sentry, "~> 8.0"}
+      {:sentry, "~> 8.0"},
+      {:ex_machina, "~> 2.4"},
+      {:elixir_uuid, "~> 1.2"},
+      {:stream_data, "~> 0.5", only: :test},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false},
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false},
     ]
   end
 
