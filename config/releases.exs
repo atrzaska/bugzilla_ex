@@ -25,4 +25,6 @@ config :bugzilla, Bugzilla.Mailer,
   adapter: Bamboo.SMTPAdapter,
   server: System.get_env("SMTP_HOST"),
   hostname: System.get_env("APP_HOST"),
-  port: String.to_integer(System.get_env("SMTP_PORT"))
+  port: String.to_integer(System.get_env("SMTP_PORT")),
+  username: System.get_env("SMTP_USER"),
+  password: System.get_env("SMTP_PASSWORD")
