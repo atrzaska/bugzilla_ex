@@ -2,7 +2,7 @@
 
 Welcome to Bugzilla!
 
-The goal of this project is to take various concepts of web software design and apply them to in a elixir application.
+The goal of this project is to take various concepts of web software design and apply them in a elixir application.
 
 ## Project description
 
