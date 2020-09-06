@@ -1,0 +1,48 @@
+version: '3'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:12-alpine
+    restart: always
+    volumes:
+      - pg:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: bugzilla_prod
+      POSTGRES_PASSWORD: postgres
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+  mailcatcher:
+    image: tophfr/mailcatcher:latest
+    container_name: mailcatcher
+    ports:
+      - 1025:25
+      - 1080:80
+  rabbitmq:
+    image: rabbitmq:alpine
+    container_name: rabbitmq
+    ports:
+      - 4369:4369
+      - 5671:5671
+      - 5672:5672
+      - 25672:25672
+  app:
+    container_name: bugzilla-app
+    image: bugzilla/app:latest
+    env_file: app.env
+    restart: always
+    links:
+      - postgres
+      - mailcatcher
+    depends_on:
+      - postgres
+      - mailcatcher
+    ports:
+      - 4000:4000
+
+volumes:
+  pg:

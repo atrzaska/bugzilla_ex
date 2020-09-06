@@ -10,24 +10,25 @@ use Mix.Config
 config :bugzilla,
   ecto_repos: [Bugzilla.Repo]
 
+config :bugzilla, Bugzilla.Repo,
+  url: System.get_env("DATABASE_URL"),
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
 # Configures the endpoint
 config :bugzilla, BugzillaWeb.Endpoint,
-  url: [host: "localhost"],
-  secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  render_errors: [view: BugzillaWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: Bugzilla.PubSub,
-  live_view: [signing_salt: System.get_env("SECRET_SALT")]
+  url: [
+    host: System.get_env("APP_HOST") || "localhost",
+    scheme: System.get_env("APP_SCHEME") || "http",
+    port: String.to_integer(System.get_env("APP_PORT") || "80")
+  ],
+  http: [port: 4000, transport_options: [socket_opts: [:inet6]]],
+  secret_key_base: System.get_env("SECRET_KEY_BASE") || "1",
+  live_view: [signing_salt: System.get_env("SECRET_SALT") || "1"],
+  render_errors: [view: BugzillaWeb.ErrorView, accepts: ~w(html json), layout: false]
 
 # Configures Elixir's Logger
 config :logger,
   backends: [:console, Sentry.LoggerBackend]
-
-config :sentry,
-  dsn: System.get_env("SENTRY_DSN"),
-  environment_name: Mix.env(),
-  included_environments: [:prod],
-  enable_source_code_context: true,
-  root_source_code_path: File.cwd!()
 
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
@@ -43,9 +44,9 @@ config :phoenix, :template_engines,
 # Bamboo
 config :bugzilla, Bugzilla.Mailer,
   adapter: Bamboo.SMTPAdapter,
-  server: "localhost",
-  hostname: "bugzilla.app",
-  port: 1025
+  server: System.get_env("SMTP_HOST") || "localhost",
+  hostname: System.get_env("APP_HOST") || "localhost",
+  port: String.to_integer(System.get_env("SMTP_PORT") || "1080")
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

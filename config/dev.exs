@@ -2,9 +2,7 @@ use Mix.Config
 
 # Configure your database
 config :bugzilla, Bugzilla.Repo,
-  url: System.get_env("DATABASE_URL"),
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  show_sensitive_data_on_connection_error: true
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -13,7 +11,6 @@ config :bugzilla, Bugzilla.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :bugzilla, BugzillaWeb.Endpoint,
-  http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
