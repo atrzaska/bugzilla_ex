@@ -2,7 +2,12 @@
 
 set -ex
 
-cd ~/apps/bugzilla_ex
-git pull
-docker build . -t bugzilla/app:latest
-(cd docker && docker-compose up -d)
+(
+  CWD=$(cd $(dirname "$0");pwd)
+  PROJECT_PATH=$CWD/..
+  cd $PROJECT_PATH
+
+  git pull
+  docker build . -t bugzilla/app
+  (cd docker && docker-compose up -d)
+)
