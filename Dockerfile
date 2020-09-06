@@ -32,7 +32,7 @@ RUN mix phx.digest
 COPY priv priv
 COPY lib lib
 COPY config config
-RUN mix compile
+RUN mix compile --warnings-as-errors
 
 # build release
 # at this point we should copy the rel directory but
