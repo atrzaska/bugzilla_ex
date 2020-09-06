@@ -16,12 +16,6 @@ services:
     container_name: redis
     ports:
       - 6379:6379
-  mailcatcher:
-    image: tophfr/mailcatcher:latest
-    container_name: mailcatcher
-    ports:
-      - 1025:25
-      - 1080:80
   rabbitmq:
     image: rabbitmq:alpine
     container_name: rabbitmq
@@ -37,10 +31,12 @@ services:
     restart: always
     links:
       - postgres
-      - mailcatcher
+      - redis
+      - rabbitmq
     depends_on:
       - postgres
-      - mailcatcher
+      - redis
+      - rabbitmq
     ports:
       - 4000:4000
 
