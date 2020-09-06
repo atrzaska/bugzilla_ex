@@ -21,7 +21,7 @@ defmodule BugzillaWeb.Endpoint do
     at: "/",
     from: :bugzilla,
     gzip: false,
-    only: ~w(css fonts images js favicon.ico robots.txt)
+    only: ~w(css fonts images js favicon.ico txt)
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
