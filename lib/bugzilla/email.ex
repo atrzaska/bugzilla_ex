@@ -50,8 +50,7 @@ defmodule Bugzilla.Email do
   defp base_email(user) do
     new_email()
     |> to(user.email)
-    |> from("noreply@bugzilla.app")
-    |> put_header("Reply-To", "noreply@bugzilla.app")
+    |> from(from_email())
     |> put_html_layout({BugzillaWeb.LayoutView, "email.html"})
     |> put_text_layout(false)
     |> to(user.email)
@@ -65,5 +64,10 @@ defmodule Bugzilla.Email do
     email
     |> html_body(html)
     |> text_body(text)
+  end
+
+  defp from_email do
+    host = System.get_env("APP_HOST")
+    "noreply@#{host}"
   end
 end
