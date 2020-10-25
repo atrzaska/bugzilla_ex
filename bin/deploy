@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+set -ex
+
+SSH=app@bugzilla.uk.to
+
+(
+  CWD=$(cd $(dirname "$0");pwd)
+  PROJECT_PATH=$CWD/..
+  cd $PROJECT_PATH
+
+  git pull
+  docker build . -t bugzilla/app
+  docker save bugzilla/app | bzip2 | ssh $SSH 'bunzip2 | docker load'
+)
