@@ -8,6 +8,6 @@ set -ex
   cd $PROJECT_PATH
 
   git pull
-  docker build . -t bugzilla/app
+  #docker build . -t bugzilla/app
   (cd docker && docker-compose up -d)
 )
