@@ -10,8 +10,8 @@ header.d-flex.align-items-center.p-4
       p.mb-0 = @error_message
 
   .form-group
-    = email_input f, :email, required: true, class: "form-control", placeholder: "Email address"
-    = password_input f, :password, required: true, class: "form-control", placeholder: "Password"
+    = email_input f, :email, required: true, class: "form-control form-control-first", placeholder: "Email address"
+    = password_input f, :password, required: true, class: "form-control form-control-last", placeholder: "Password"
 
   .form-group
     label.d-block.font-weight-normal.mb-4.text-secondary

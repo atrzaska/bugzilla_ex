@@ -15,13 +15,13 @@
     z-index: 2;
   }
 
-  .form-control:first-child {
+  .form-control-first {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
   }
 
-  .form-control:not(:first-child):not(:last-child) {
+  .form-control-middle {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
@@ -29,7 +29,7 @@
     border-top-right-radius: 0;
   }
 
-  .form-control:last-child {
+  .form-control-last {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
