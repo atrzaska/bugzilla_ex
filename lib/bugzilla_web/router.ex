@@ -15,6 +15,7 @@ defmodule BugzillaWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+    plug BugzillaWeb.Graphql.Context
   end
 
   pipeline :empty_layout do
@@ -32,10 +33,13 @@ defmodule BugzillaWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", BugzillaWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+    forward "/graph", Absinthe.Plug, schema: BugzillaWeb.Graphql.Schema
+  end
 
+  forward "/api/graphiql", Absinthe.Plug.GraphiQL, schema: BugzillaWeb.Graphql.Schema
+  
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put

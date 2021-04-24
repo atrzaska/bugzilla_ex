@@ -1,6 +1,9 @@
 defmodule BugzillaWeb.UserSocket do
   use Phoenix.Socket
 
+  use Absinthe.Phoenix.Socket,
+    schema: BugzillaWeb.Graphql.Schema
+
   ## Channels
   # channel "room:*", BugzillaWeb.RoomChannel
 
@@ -16,7 +19,15 @@ defmodule BugzillaWeb.UserSocket do
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
   @impl true
-  def connect(_params, socket, _connect_info) do
+  def connect(%{"user_uuid" => user_uuid}, socket, _connect_info) do
+    {:ok, socket}
+    socket =
+      Absinthe.Phoenix.Socket.put_options(socket,
+        context: %{
+          user_uuid: user_uuid
+        }
+      )
+
     {:ok, socket}
   end
 
